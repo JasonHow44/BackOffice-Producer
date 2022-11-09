@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "insurancewebapptest"
+  },
+  "targets": {
+    "insurancewebapptest": {
+      "hosting": {
+        "producerpage": [
+          "agent-backoffice-producer"
+        ]
+      }
+    }
+  }
+}

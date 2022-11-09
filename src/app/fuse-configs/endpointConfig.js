@@ -1,0 +1,1 @@
+export const firebaseFuncitonSendEmailEndpoint = "https://us-central1-insurancewebapptest.cloudfunctions.net/sendMailOverHTTP"
