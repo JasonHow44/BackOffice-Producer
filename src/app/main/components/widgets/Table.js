@@ -192,8 +192,12 @@ function Widget(props) {
 													{!props.editable &&
 													headers.length > 0 &&
 													formattedString(tableContent[rowKey][headers[colNum].value]) &&
-													(headers[colNum].value.split(' ').includes('Commissions') ||
-														headers[colNum].value.split(' ').includes('Commission')||headers[colNum].value.split(' ').includes('Bonuses'))
+													(colKey === 'Annual Auto Premium' ||
+														colKey === 'Annual Fire Premium' ||
+														colKey === 'Annual Life Premium' ||
+														colKey === ' Annual Health Premium' ||
+														colKey === 'Annual Bank Premium' ||
+														colKey === 'Total Annual Premium')
 														? '$' +
 														  formattedString(tableContent[rowKey][headers[colNum].value])
 														: formattedString(tableContent[rowKey][headers[colNum].value])}
