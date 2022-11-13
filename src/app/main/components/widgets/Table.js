@@ -174,7 +174,9 @@ function Widget(props) {
 										(colKey, colNum) =>
 											colKey !== 'id' &&
 											colKey !== 'type' &&
-											colKey !== 'month' && (
+											colKey !== 'month' &&
+											headers.length > 0 &&
+											headers[colNum] && (
 												<TableCell
 													key={`colKey_${rowNum}_${colNum}`}
 													component="th"
@@ -184,7 +186,7 @@ function Widget(props) {
 											p-0 text-xs truncate 
 											${colNum === Object.keys(tableContent[rowKey]).length - 1 ? `border-r-0` : `border-r-1`} 
 											${rows.length > 0 && rows[rowNum].border}
-											${headers.length > 0 && headers[colNum].border}
+											${headers[colNum].border}
 										`)}
 												>
 													{!props.editable &&
