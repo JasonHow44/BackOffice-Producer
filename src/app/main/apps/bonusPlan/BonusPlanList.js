@@ -193,7 +193,7 @@ function ContactsList(props) {
 				sortable: true
 			},
 			{
-				Header: '% of Auto & Fire Premium',
+				Header: '% of Auto Premium',
 				accessor: 'amount',
 				className: 'font-bold',
 				sortable: true
@@ -217,7 +217,7 @@ function ContactsList(props) {
 				sortable: true
 			},
 			{
-				Header: '% of Auto & Fire Premium',
+				Header: '% of Fire Premium',
 				accessor: 'amount',
 				className: 'font-bold',
 				sortable: true
@@ -241,7 +241,7 @@ function ContactsList(props) {
 				sortable: true
 			},
 			{
-				Header: '% of Auto & Fire Premium',
+				Header: '% of Life Premium',
 				accessor: 'amount',
 				className: 'font-bold',
 				sortable: true
@@ -265,7 +265,7 @@ function ContactsList(props) {
 				sortable: true
 			},
 			{
-				Header: '% of Auto & Fire Premium',
+				Header: '% of Health Premium',
 				accessor: 'amount',
 				className: 'font-bold',
 				sortable: true
@@ -289,7 +289,7 @@ function ContactsList(props) {
 				sortable: true
 			},
 			{
-				Header: '% of Auto & Fire Premium',
+				Header: '% of Bank Premium',
 				accessor: 'amount',
 				className: 'font-bold',
 				sortable: true
