@@ -10,7 +10,7 @@ import reducer from '../store';
 import Icon from '@material-ui/core/Icon';
 import { Link, useParams } from 'react-router-dom';
 import FuseAnimate from '@fuse/core/FuseAnimate/FuseAnimate';
-import { getEntries, selectEntries, saveProduct, updateProduct } from '../store/entrySlice';
+import { getEntries, selectEntries, saveProduct, updateProduct, cleanEditData } from '../store/entrySlice';
 import { getBonus, selectBonus } from '../store/bonusSlice';
 import { getMarketing, selectMarketing } from '../store/businessSlice';
 import TextInput from '../../../components/TextField';
@@ -783,6 +783,11 @@ function Products() {
 		}
 	}
 
+	const addMultiAuto = () => {
+		history.push('/apps/enter-sales/multi-auto-polices');
+		dispatch(cleanEditData());
+	};
+
 	return (
 		<FusePageCarded
 			classes={{
@@ -825,17 +830,31 @@ function Products() {
 							</div>
 						</div>
 					</div>
-					<FuseAnimate animation="transition.slideRightIn" delay={300}>
-						<Button
-							className="whitespace-nowrap normal-case"
-							variant="contained"
-							color="secondary"
-							// disabled={!canBeSubmitted()}
-							onClick={() => onSave()}
-						>
-							Save
-						</Button>
-					</FuseAnimate>
+					<div>
+						<FuseAnimate animation="transition.slideRightIn" delay={300}>
+							<Button
+								// component={Link}
+								// to="/apps/enter-sales/entry/new"
+								className="whitespace-nowrap normal-case mr-32"
+								variant="contained"
+								color="secondary"
+								onClick={addMultiAuto}
+							>
+								<span className="sm:flex">Add Multi Auto Policies</span>
+							</Button>
+						</FuseAnimate>
+						<FuseAnimate animation="transition.slideRightIn" delay={300}>
+							<Button
+								className="whitespace-nowrap normal-case"
+								variant="contained"
+								color="secondary"
+								// disabled={!canBeSubmitted()}
+								onClick={() => onSave()}
+							>
+								Save
+							</Button>
+						</FuseAnimate>
+					</div>
 				</div>
 			}
 			content={

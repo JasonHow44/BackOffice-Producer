@@ -67,6 +67,35 @@ mock.onPost('/api/e-commerce-app/product/save').reply(async request => {
 	return [200, product];
 });
 
+mock.onPost('/api/e-commerce-app/product/multi-auto-save').reply(async request => {
+	const data = JSON.parse(request.data);
+	let product = null;
+	eCommerceDB.entrys = eCommerceDB.entrys.map(_product => {
+		if (_product.id === data.id) {
+			product = data;
+			return product;
+		}
+		return _product;
+	});
+
+	if (!product) {
+		product = data;
+		eCommerceDB.entrys = [...eCommerceDB.entrys, product];
+	}
+	data.map(item => {
+		const id = Date.now();
+		const year = new Date().getFullYear();
+		console.log(`Sales/${year}/${item.belongTo}/${item.policyType[0]}/${item.uid}/${id}`);
+		if (item.policyType[0] !== undefined)
+			realDb.ref(`Sales/${year}/${item.belongTo}/${item.policyType[0]}/${item.uid}/${id}`).set({
+				...data,
+				sellerId: item.uid,
+				id
+			});
+	});
+	return [200, product];
+});
+
 mock.onPost('/api/e-commerce-app/product/update').reply(async request => {
 	let data = JSON.parse(request.data);
 	let product = null;
@@ -83,16 +112,15 @@ mock.onPost('/api/e-commerce-app/product/update').reply(async request => {
 		product = data;
 		eCommerceDB.entrys = [...eCommerceDB.entrys, product];
 	}
-	var year = new Date().getFullYear()
+	var year = new Date().getFullYear();
 
 	data.map(item => {
-		console.log(`Sales/${year}/${item.belongTo}/${item.policyType}/${item.uid}/${item.id}`)
+		console.log(`Sales/${year}/${item.belongTo}/${item.policyType}/${item.uid}/${item.id}`);
 		realDb.ref(`Sales/${year}/${item.belongTo}/${item.policyType}/${item.uid}/${item.id}`).set({
 			...item,
 			sellerId: item.uid
 		});
-	})
-	
+	});
 
 	return [200, product];
 });

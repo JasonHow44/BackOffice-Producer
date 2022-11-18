@@ -43,6 +43,17 @@ export const saveProduct = createAsyncThunk(
 	}
 );
 
+export const saveMultiAutoProduct = createAsyncThunk(
+	'eCommerceApp/product/saveMultiAutoProduct',
+	async (product, { dispatch, getState }) => {
+		const response = await axios.post('/api/e-commerce-app/product/multi-auto-save', product);
+		const data = await response.data;
+		dispatch(getEntries());
+		// dispatch(cleanEditData());
+		return data;
+	}
+);
+
 export const updateProduct = createAsyncThunk(
 	'eCommerceApp/product/saveProduct',
 	async (product, { dispatch, getState }) => {
@@ -102,6 +113,9 @@ const productsSlice = createSlice({
 			state.editData = {
 				...action.payload
 			};
+		},
+		cleanEditData: (state, action) => {
+			state.editData = {};
 		}
 	},
 	extraReducers: {
@@ -109,6 +123,6 @@ const productsSlice = createSlice({
 	}
 });
 
-export const { setProductsSearchText, setEditData } = productsSlice.actions;
+export const { setProductsSearchText, setEditData, cleanEditData } = productsSlice.actions;
 
 export default productsSlice.reducer;
