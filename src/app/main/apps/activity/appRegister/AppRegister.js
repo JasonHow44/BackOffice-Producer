@@ -70,27 +70,30 @@ function AppRegister(props) {
 
 			let i = 0;
 			Object.keys(entries[0]).map((entryName) => {
-				if(entries[0][entryName].hasOwnProperty(UID)) {
-					Object.keys(entries[0][entryName][UID]).map((key, rowNum) => {
-						const item = entries[0][entryName][UID][key];						
-						const issuedMonth = item.datePolicyIsIssued==='' ? '' : (new Date(item.datePolicyIsIssued)).getMonth() + 1;
-						const writtenMonth = (new Date(item.datePolicyIsWritten)).getMonth() + 1; 										
-						temp[i] = {};
-						temp[i]["Client Name"] = item.policyHolderName;
-						temp[i]["Policy(Tracking) Number or Description"] = item.policyInformation;					
-						temp[i]["Date Product Is Written"] = formattedDate(new Date(item.datePolicyIsWritten));
-						temp[i]["Date Product Is Issued"] = formattedDate(new Date(item.datePolicyIsIssued));
-						temp[i]["Product Line"] = entryNames[entryName];
-						temp[i]["Product Type"] = item["typeOfProduct"];
-						temp[i]["Source of Business"] = item["sourceOfBusiness"];
-						temp[i]["Product Dollars"] = item["policyPremium"];
-						temp[i]["Bonus"] = item["dollarBonus"];
-						temp[i]["Month Written"] = writtenMonth;
-						temp[i]["Month Issued"] = issuedMonth;
-						i ++;																						
-					});
-				}
-			});		
+				Object.entries(entries[0][entryName]).forEach(([user, entry]) => {
+					if (user === UID || user === 'OfficeCount') {
+						console.log(user);
+						Object.keys(entry).map((key, rowNum) => {
+							const item = entry[key];						
+							const issuedMonth = item.datePolicyIsIssued==='' ? '' : (new Date(item.datePolicyIsIssued)).getMonth() + 1;
+							const writtenMonth = (new Date(item.datePolicyIsWritten)).getMonth() + 1; 										
+							temp[i] = {};
+							temp[i]["Client Name"] = item.policyHolderName;
+							temp[i]["Policy(Tracking) Number or Description"] = item.policyInformation;					
+							temp[i]["Date Product Is Written"] = formattedDate(new Date(item.datePolicyIsWritten));
+							temp[i]["Date Product Is Issued"] = formattedDate(new Date(item.datePolicyIsIssued));
+							temp[i]["Product Line"] = entryNames[entryName];
+							temp[i]["Product Type"] = item["typeOfProduct"];
+							temp[i]["Source of Business"] = item["sourceOfBusiness"];
+							temp[i]["Product Dollars"] = item["policyPremium"];
+							temp[i]["Bonus"] = item["dollarBonus"];
+							temp[i]["Month Written"] = writtenMonth;
+							temp[i]["Month Issued"] = issuedMonth;
+							i++;
+						});
+					}
+				});
+			});
 		}
 
 		console.log('--------------------temp=', temp, );
@@ -110,7 +113,6 @@ function AppRegister(props) {
 		if(product !== 'Total') {
 			temp = _.filter(temp, item => item['Product Line'].toLowerCase().includes(product.toLowerCase()));
 		}
-
 		if (searchText.length!==0) {
 			setMain(_.filter(temp, item => item['Client Name'].toLowerCase().includes(searchText.toLowerCase())));
 		} else {
