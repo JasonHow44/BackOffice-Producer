@@ -68,7 +68,7 @@ mock.onPost('/api/e-commerce-app/product/save').reply(async request => {
 });
 
 mock.onPost('/api/e-commerce-app/product/multi-auto-save').reply(async request => {
-	const data = JSON.parse(request.data);
+	let data = JSON.parse(request.data);
 	let product = null;
 	eCommerceDB.entrys = eCommerceDB.entrys.map(_product => {
 		if (_product.id === data.id) {
@@ -85,11 +85,11 @@ mock.onPost('/api/e-commerce-app/product/multi-auto-save').reply(async request =
 	data.map(item => {
 		const id = Date.now();
 		const year = new Date().getFullYear();
+		item.sellerId = item.uid;
 		console.log(`Sales/${year}/${item.belongTo}/${item.policyType[0]}/${item.uid}/${id}`);
 		if (item.policyType[0] !== undefined)
 			realDb.ref(`Sales/${year}/${item.belongTo}/${item.policyType[0]}/${item.uid}/${id}`).set({
-				...data,
-				sellerId: item.uid,
+				...item,
 				id
 			});
 	});

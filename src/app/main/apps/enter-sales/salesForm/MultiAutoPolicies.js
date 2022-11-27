@@ -158,9 +158,6 @@ function Products() {
 	}, [products, searchText]);
 
 	useEffect(() => {
-		const belongTo = localStorage.getItem('@BELONGTO');
-		const uid = localStorage.getItem('@UID');
-		const temp = [];
 		const tempUsers = [];
 		const tempMarketing = [];
 		const tempProductList = [];
@@ -187,10 +184,8 @@ function Products() {
 		}
 		if (users.length > 0) {
 			users.map(item => {
-				temp.push({ item: item.data.displayName, value: item });
 				tempUsers.push({ item: item.data.displayName, value: item.id });
 			});
-			temp.push({ item: 'Office Count', value: 'OfficeCount' });
 		}
 
 		if (bonus.length > 0) {
@@ -219,14 +214,6 @@ function Products() {
 	}
 
 	function handleChangeValue(data) {
-		const belongTo = localStorage.getItem('@BELONGTO');
-		const uid = localStorage.getItem('@UID');
-		const tempBonus = [];
-		const tempFireBonus = [];
-		const tempHealthBonus = [];
-		const tempLifeBonus = [];
-		const tempBankBonus = [];
-		console.log(data);
 		if (Object.keys(data)[0] === 'policyHolderType') {
 			setState({
 				...state,
