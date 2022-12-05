@@ -28,8 +28,8 @@ import { getEntries, selectEntries } from '../store/entriesSlice';
 import { monthsAndQuarters, policiesAndPremium2, Options as options, policies } from '../../../utils/Globals';
 import { getMain } from '../../../utils/Function';
 
-const belongTo = localStorage.getItem('@BELONGTO');
-const UID = localStorage.getItem('@UID');
+const belongTo = sessionStorage.getItem('@BELONGTO');
+const UID = sessionStorage.getItem('@UID');
 
 function SalesResults(props) {
 	const dispatch = useDispatch();

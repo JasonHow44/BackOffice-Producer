@@ -30,8 +30,8 @@ import { getVision, selectVision } from '../store/visionSlice';
 import { policies, Options as options } from '../../../utils/Globals';
 import { dividing, getLevel, getMain } from '../../../utils/Function';
 
-const belongTo = localStorage.getItem('@BELONGTO');
-const UID = localStorage.getItem('@UID');
+const belongTo = sessionStorage.getItem('@BELONGTO');
+const UID = sessionStorage.getItem('@UID');
 
 function Multiline(props) {
 	const dispatch = useDispatch();

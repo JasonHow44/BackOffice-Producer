@@ -2,13 +2,13 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/too
 import axios from 'axios';
 import { realDb } from '../../../../../@fake-db/db/firebase';
 
-var belongTo = localStorage.getItem('@BELONGTO');
+var belongTo = sessionStorage.getItem('@BELONGTO');
 
 export const getBonus = createAsyncThunk(
 	'eCommerceApp/bonus/getProducts',
 	() =>
 		new Promise((resolve, reject) => {
-			var uid = localStorage.getItem('@UID');
+			var uid = sessionStorage.getItem('@UID');
 			var starCountRef = realDb.ref(`BonusPlan/${belongTo}/${uid}/`);
 			var bonusPlanTemplateRef = realDb.ref(`BonusPlanTemplate/${belongTo}`);
 

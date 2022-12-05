@@ -1,7 +1,7 @@
 import { monthsAndQuarters, bonusPlanDbNames, policies, months, months1, Options as options } from './Globals';
 
-const belongTo = localStorage.getItem('@BELONGTO');
-const UID = localStorage.getItem('@UID');
+const belongTo = sessionStorage.getItem('@BELONGTO');
+const UID = sessionStorage.getItem('@UID');
 
 export const swap = json => {
 	const ret = {};

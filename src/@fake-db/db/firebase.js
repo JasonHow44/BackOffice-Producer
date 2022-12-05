@@ -23,3 +23,5 @@ export const realDb = firebase.database()
 export const db = firebase.firestore();
 export const auth = firebase.auth();
 export const storage = firebase.storage();
+
+auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)

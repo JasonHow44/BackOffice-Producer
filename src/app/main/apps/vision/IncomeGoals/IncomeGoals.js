@@ -34,8 +34,8 @@ import { months1, policies, incomeAvgsRows, incomeGoalsRows, incomeGoalsHeaders,
 import { ceil, swap, getLevel, getOtherActivityBonus } from '../../../utils/Function';
 import { dateComparer } from '@material-ui/data-grid';
 
-const belongTo = localStorage.getItem('@BELONGTO');
-const UID = localStorage.getItem('@UID');
+const belongTo = sessionStorage.getItem('@BELONGTO');
+const UID = sessionStorage.getItem('@UID');
 
 let avgsTableContent = {};
 let goalsTableContent = {};

@@ -38,8 +38,8 @@ import { Options as options, policies } from '../../../utils/Globals';
 import { dividing, ceil, getMain } from '../../../utils/Function';
 import { TabPanel } from '@material-ui/lab';
 
-const belongTo = localStorage.getItem('@BELONGTO');
-const UID = localStorage.getItem('@UID');
+const belongTo = sessionStorage.getItem('@BELONGTO');
+const UID = sessionStorage.getItem('@UID');
 
 const useStyles = makeStyles(theme => ({
 	content: {

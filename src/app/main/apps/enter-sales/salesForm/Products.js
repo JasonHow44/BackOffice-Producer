@@ -98,7 +98,7 @@ function Products() {
 	const products = useSelector(selectEntries);
 	const bonus = useSelector(selectBonus);
 	const bonusLists = alignBonus(bonus);
-	const belongTo = localStorage.getItem('@BELONGTO');
+	const belongTo = sessionStorage.getItem('@BELONGTO');
 	const marketing = useSelector(selectMarketing);
 	const users = useSelector(selectUsers);
 	const routeParams = useParams();
@@ -495,7 +495,7 @@ function Products() {
 		if (checkValidation()) {
 			let bonusValues = getBonusArange();
 
-			let uid = localStorage.getItem('@UID');
+			let uid = sessionStorage.getItem('@UID');
 			var requestForm = [];
 			console.log(route)
 			let form = {

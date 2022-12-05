@@ -81,18 +81,18 @@ class Auth0Service {
 		if (authResult && authResult.accessToken && authResult.idToken) {
 			// Set the time that the access token will expire at
 			const expiresAt = JSON.stringify(authResult.expiresIn * 1000 + new Date().getTime());
-			localStorage.setItem('access_token', authResult.accessToken);
-			localStorage.setItem('id_token', authResult.idToken);
-			localStorage.setItem('expires_at', expiresAt);
+			sessionStorage.setItem('access_token', authResult.accessToken);
+			sessionStorage.setItem('id_token', authResult.idToken);
+			sessionStorage.setItem('expires_at', expiresAt);
 		}
 	};
 
 	logout = () => {
 		// Clear access token and ID token from local storage
-		localStorage.removeItem('access_token');
-		localStorage.removeItem('id_token');
-		localStorage.removeItem('expires_at');
-		localStorage.removeItem('auth0.ssodata');
+		sessionStorage.removeItem('access_token');
+		sessionStorage.removeItem('id_token');
+		sessionStorage.removeItem('expires_at');
+		sessionStorage.removeItem('auth0.ssodata');
 	};
 
 	isAuthenticated = () => {
@@ -101,7 +101,7 @@ class Auth0Service {
 		}
 		// Check whether the current time is past the
 		// access token's expiry time
-		const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+		const expiresAt = JSON.parse(sessionStorage.getItem('expires_at'));
 		const isNotExpired = new Date().getTime() < expiresAt;
 		if (isNotExpired) {
 			return true;
@@ -152,11 +152,11 @@ class Auth0Service {
 	};
 
 	getAccessToken = () => {
-		return localStorage.getItem('access_token');
+		return sessionStorage.getItem('access_token');
 	};
 
 	getIdToken = () => {
-		return window.localStorage.getItem('id_token');
+		return window.sessionStorage.getItem('id_token');
 	};
 
 	getTokenData = () => {

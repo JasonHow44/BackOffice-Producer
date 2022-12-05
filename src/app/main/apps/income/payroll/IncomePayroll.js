@@ -29,8 +29,8 @@ import { getEntries, selectEntries } from '../store/entriesSlice';
 import { months, monthsAndQuarters, policiesAndBonuses,policiesAndCommissions, Options as options, policies } from '../../../utils/Globals';
 import { getLevel, getMain } from '../../../utils/Function';
 
-const belongTo = localStorage.getItem('@BELONGTO');
-const UID = localStorage.getItem('@UID');
+const belongTo = sessionStorage.getItem('@BELONGTO');
+const UID = sessionStorage.getItem('@UID');
 
 function IncomePayroll(props) {
 	const dispatch = useDispatch();

@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
 
 const middlewares = [];
 
-const storage = require("redux-persist/lib/storage").default;
+const storage = require("redux-persist/lib/storage/session").default;
 
 const persistConfig = {
 	key: "data",

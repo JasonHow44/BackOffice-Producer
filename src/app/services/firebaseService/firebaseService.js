@@ -52,8 +52,8 @@ class FirebaseService {
 			return false;
 		}
 		console.log(user)
-		localStorage.setItem("@UID", user.uid)
-		localStorage.setItem("@BELONGTO", user.belongTo)
+		sessionStorage.setItem("@UID", user.uid)
+		sessionStorage.setItem("@BELONGTO", user.belongTo)
 		return realDb.ref(`users/${user.uid}`).set({...user, id:user.uid});
 	};
 

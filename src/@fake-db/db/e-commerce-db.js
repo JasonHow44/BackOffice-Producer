@@ -6,7 +6,7 @@ const eCommerceDB = {
 	entrys: []
 };
 
-var belongTo = localStorage.getItem('@BELONGTO');
+var belongTo = sessionStorage.getItem('@BELONGTO');
 
 mock.onGet('/api/e-commerce-app/products').reply(
 	() =>
@@ -39,7 +39,7 @@ mock.onGet('/api/e-commerce-app/product').reply(request => {
 mock.onPost('/api/e-commerce-app/product/save').reply(async request => {
 	const data = JSON.parse(request.data);
 	let product = null;
-	const uid = localStorage.getItem('@UID');
+	const uid = sessionStorage.getItem('@UID');
 	eCommerceDB.entrys = eCommerceDB.entrys.map(_product => {
 		if (_product.id === data.id) {
 			product = data;
@@ -99,7 +99,7 @@ mock.onPost('/api/e-commerce-app/product/multi-auto-save').reply(async request =
 mock.onPost('/api/e-commerce-app/product/update').reply(async request => {
 	let data = JSON.parse(request.data);
 	let product = null;
-	let uid = localStorage.getItem('@UID');
+	let uid = sessionStorage.getItem('@UID');
 	eCommerceDB.entrys = eCommerceDB.entrys.map(_product => {
 		if (_product.id === data.id) {
 			product = data;

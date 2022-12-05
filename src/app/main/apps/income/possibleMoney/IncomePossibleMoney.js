@@ -27,8 +27,8 @@ import { getEntries, selectEntries } from '../store/entriesSlice';
 import { bonusPlanDbNames, Options as options, policies } from '../../../utils/Globals';
 import { ceil, dividing, getLevel, getMain } from '../../../utils/Function';
 
-const belongTo = localStorage.getItem('@BELONGTO');
-const UID = localStorage.getItem('@UID');
+const belongTo = sessionStorage.getItem('@BELONGTO');
+const UID = sessionStorage.getItem('@UID');
 
 function PossibleMoney(props) {
 	const dispatch = useDispatch();

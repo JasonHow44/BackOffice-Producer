@@ -2,8 +2,8 @@ import _ from '@lodash';
 import mock from '../mock';
 import { db, realDb } from './firebase';
 
-var belongTo = localStorage.getItem('@BELONGTO')
-var UID = localStorage.getItem('@UID')
+var belongTo = sessionStorage.getItem('@BELONGTO')
+var UID = sessionStorage.getItem('@UID')
 
 const visionAppDB = {
 	widgets: [

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/too
 import axios from 'axios';
 import { realDb } from '../../../../../@fake-db/db/firebase';
 
-var belongTo = localStorage.getItem('@BELONGTO');
+var belongTo = sessionStorage.getItem('@BELONGTO');
 
 export const getEntries = createAsyncThunk(
 	'eCommerceApp/products/getProducts',
@@ -10,7 +10,7 @@ export const getEntries = createAsyncThunk(
 		new Promise((resolve, reject) => {
 			var year = new Date().getFullYear();
 			var starCountRef = realDb.ref(`Sales/${year}/${belongTo}`);
-			var uid = localStorage.getItem('@UID');
+			var uid = sessionStorage.getItem('@UID');
 
 			var entries = [];
 			starCountRef.on('value', snapshot => {
@@ -69,7 +69,7 @@ export const removeProducts = createAsyncThunk(
 	async (productIds, { dispatch, getState }) => {
 		const response = await axios.post('/api/e-commerce-app/remove-products', { productIds });
 		const data = await response.data;
-		const uid = localStorage.getItem('@UID');
+		const uid = sessionStorage.getItem('@UID');
 		var year = new Date().getFullYear();
 		productIds.map(item => {
 			var starCountRef = realDb.ref(`Sales/${year}/${belongTo}/Entries/${uid}/${item}`);

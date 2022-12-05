@@ -87,7 +87,7 @@ function ProductsTable(props) {
 	const products = useSelector(selectHealthes);
 
 	const searchText = useSelector(({ eCommerceApp }) => eCommerceApp.products.searchText);
-	const isAdmin = localStorage.getItem('@ISADMIN');
+	const isAdmin = sessionStorage.getItem('@ISADMIN');
 
 	const classes = useStyles();
 	const [loading, setLoading] = useState(true);

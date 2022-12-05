@@ -24,8 +24,8 @@ function OtherLine(props) {
 		const entries = 
 			state.entries.length > 0 &&
 			state.entries[0].hasOwnProperty(props.entry) && 
-			state.entries[0][props.entry].hasOwnProperty[localStorage.getItem("@UID")] ?
-			state.entries[0][props.entry][localStorage.getItem("@UID")] : {};
+			state.entries[0][props.entry].hasOwnProperty[sessionStorage.getItem("@UID")] ?
+			state.entries[0][props.entry][sessionStorage.getItem("@UID")] : {};
 		const marketings = state.marketings;
 		const production = state.production;
 

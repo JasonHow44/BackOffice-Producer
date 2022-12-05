@@ -34,7 +34,7 @@ import { getEntries, selectEntries, setSearchText } from '../store/entriesSlice'
 import { Options as options, months1 } from '../../../utils/Globals';
 import { formattedDate } from '../../../utils/Function';
 
-const UID = localStorage.getItem("@UID");
+const UID = sessionStorage.getItem("@UID");
 
 function AppRegister(props) {
 	const dispatch = useDispatch();

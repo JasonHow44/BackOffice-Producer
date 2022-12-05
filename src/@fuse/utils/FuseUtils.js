@@ -156,7 +156,7 @@ class FuseUtils {
 	static generateRoutesFromConfigs(configs, defaultAuth) {
 		const { pathname } = window.location;
 		if(pathname.includes("admin")){
-			localStorage.setItem("@ISADMIN", false)
+			sessionStorage.setItem("@ISADMIN", false)
 		} 
 		let allRoutes = [];
 		configs.forEach(config => {

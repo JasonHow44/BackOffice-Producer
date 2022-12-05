@@ -5,7 +5,7 @@ import { db, realDb } from './firebase';
 const eCommerceDB = {
 	entrys: []
 };
-var belongTo = localStorage.getItem('@BELONGTO')
+var belongTo = sessionStorage.getItem('@BELONGTO')
 
 mock.onGet('/api/fire-entry/products').reply(() => new Promise((resolve, reject) => {
 	var starCountRef = realDb.ref(`Sales/${belongTo}/FireEntries/`);
@@ -37,7 +37,7 @@ mock.onGet('/api/fire-entry/product').reply(request => {
 mock.onPost('/api/fire-entry/product/save').reply(async request => {
 	const data = JSON.parse(request.data);
 	let product = null;
-	const uid = localStorage.getItem('@UID')
+	const uid = sessionStorage.getItem('@UID')
 	eCommerceDB.entrys = eCommerceDB.entrys.map(_product => {
 		if (_product.id === data.id) {
 			product = data;

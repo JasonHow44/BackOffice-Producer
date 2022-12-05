@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/too
 import axios from 'axios';
 import {realDb} from '../../../../../@fake-db/db/firebase'
 
-var belongTo = localStorage.getItem('@BELONGTO')
-var UID = localStorage.getItem('@UID')
+var belongTo = sessionStorage.getItem('@BELONGTO')
+var UID = sessionStorage.getItem('@UID')
 
 export const getBonusPlans = createAsyncThunk(
 	'productionApp/bonusPlans/getBonusPlans', 

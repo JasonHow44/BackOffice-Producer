@@ -155,7 +155,7 @@ export const logoutUser = () => async (dispatch, getState) => {
 
 	switch (user.from) {
 		case 'firebase': {
-			localStorage.clear();
+			sessionStorage.clear();
 			auth.signOut();
 			break;
 		}

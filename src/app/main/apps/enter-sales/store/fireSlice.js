@@ -2,14 +2,14 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/too
 import axios from 'axios';
 import { realDb } from '../../../../../@fake-db/db/firebase';
 
-var belongTo = localStorage.getItem('@BELONGTO')
+var belongTo = sessionStorage.getItem('@BELONGTO')
 
 export const getFires = createAsyncThunk(
 	'eCommerceApp/fireEntries/getProducts',
 	() =>
 	
 		new Promise((resolve, reject) => {
-			const uid = localStorage.getItem('@UID')
+			const uid = sessionStorage.getItem('@UID')
 			var starCountRef = realDb.ref(`Sales/${belongTo}/FireEntries/${uid}`);
 			var entries = [];
 			starCountRef.on('value', snapshot => {
@@ -39,7 +39,7 @@ export const removeProducts = createAsyncThunk(
 	async (productIds, { dispatch, getState }) => {
 		const response = await axios.post('/api/fire-entry/remove-products', { productIds });
 		const data = await response.data;
-		const uid = localStorage.getItem('@UID')
+		const uid = sessionStorage.getItem('@UID')
 		productIds.map(item => {
 			var starCountRef = realDb.ref(`Sales/${belongTo}/FireEntries/${uid}/${item}`);
 			starCountRef.remove();

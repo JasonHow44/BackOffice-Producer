@@ -269,8 +269,8 @@ function Products() {
 	function onSave() {
 		console.log(checkValidation());
 		if (checkValidation()) {
-			const belongTo = localStorage.getItem('@BELONGTO');
-			const uid = localStorage.getItem('@UID');
+			const belongTo = sessionStorage.getItem('@BELONGTO');
+			const uid = sessionStorage.getItem('@UID');
 			const requestForm = [];
 			let form = {
 				id: Date.now(),

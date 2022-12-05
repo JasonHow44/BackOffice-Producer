@@ -8,7 +8,7 @@ export const getUsers = createAsyncThunk(
 	() =>
 		new Promise((resolve, reject) => {
 			var starCountRef = realDb.ref(`users/`);
-			var belongTo = localStorage.getItem('@BELONGTO')
+			var belongTo = sessionStorage.getItem('@BELONGTO')
 
 			var users = [];
 			starCountRef.on('value', snapshot => {

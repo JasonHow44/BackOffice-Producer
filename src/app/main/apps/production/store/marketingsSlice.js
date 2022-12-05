@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/too
 import axios from 'axios';
 import { realDb } from '../../../../../@fake-db/db/firebase';
 
-let belongTo = localStorage.getItem('@BELONGTO')
+let belongTo = sessionStorage.getItem('@BELONGTO')
 export const getMarketings = createAsyncThunk(
 	'productionApp/marketings/getMarketings',
 	() =>
