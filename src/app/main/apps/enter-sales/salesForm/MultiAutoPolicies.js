@@ -226,15 +226,22 @@ function Products() {
 	}
 
 	function checkValidation() {
-		if (!state.policyHolderName) {
-			setState({
-				...state,
-				policyHolderNameValidation: !state.policyHolderName
-			});
-			return false;
-		}
+		let validate = false;
+		state.autos = state.autos.map(item => {
+			validate = item.policyPremium && item.policyPremium;
+			return {
+				...item,
+				policyPremiumValidation: !item.policyPremium,
+				typeOfProductValidation: !item.typeOfProduct
+			};
+		});
 
-		return true;
+		validate = validate && state.policyHolderName;
+		setState({
+			...state,
+			policyHolderNameValidation: !state.policyHolderName
+		});
+		return validate;
 	}
 
 	function addAutoPolicies() {
@@ -259,7 +266,7 @@ function Products() {
 
 	function removeAutoPolicy(index) {
 		const tempAuto = [...state.autos];
-		tempAuto.pop(index, 1);
+		tempAuto.splice(index, 1);
 		setState({
 			...state,
 			autos: [...tempAuto]
@@ -299,9 +306,7 @@ function Products() {
 						dollarBonus:
 							Math.ceil(
 								((parseFloat(item.policyPremium) *
-									parseInt(
-										item.creditTypeAuto === 'solo_credit' ? 100 : item.creditPercentAuto
-									)) /
+									parseInt(item.creditTypeAuto === 'solo_credit' ? 100 : item.creditPercentAuto)) /
 									100) *
 									(parseInt(bonusLists[uid][item.typeOfProduct]) / 100) *
 									100
@@ -550,7 +555,7 @@ function Products() {
 													validation="policyPremium"
 													type="percent"
 													willvalidation
-													validate={state.policyPremiumValidation}
+													validate={item.policyPremiumValidation}
 													handleChangeValue={data => {
 														const tempAuto = [...state.autos];
 														tempAuto[index].policyPremium = data.policyPremium;
@@ -596,8 +601,8 @@ function Products() {
 															autos: [...tempAuto]
 														});
 													}}
-													willvalidation={false}
-													validate={state.typeOfProductValidation}
+													willvalidation
+													validate={item.typeOfProductValidation}
 												/>
 
 												{item.creditTypeAuto === 'split_credit' && (
