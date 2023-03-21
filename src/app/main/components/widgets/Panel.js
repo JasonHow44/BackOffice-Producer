@@ -9,7 +9,7 @@ export function Card(props) {
 		{props.title!=='' &&
 			<div className="flex items-center justify-between px-8 pt-8">
 				<Typography className="text-15 flex w-full" color="textPrimary">
-					<span className="truncate">{props.title}</span>									
+					<span className="">{props.title}</span>									
 				</Typography>				
 			</div>
 		}
@@ -41,6 +41,12 @@ function Widget1(props) {
 			}	
 			{props.type==='Two Number' &&
 				<div className="flex flex-wrap justify-around">
+					<Card {...props.data.cardData[0]} />
+					<Card {...props.data.cardData[1]} />
+				</div>
+			}
+			{props.type==='Two Number nowrap' &&
+				<div className="flex justify-around">
 					<Card {...props.data.cardData[0]} />
 					<Card {...props.data.cardData[1]} />
 				</div>

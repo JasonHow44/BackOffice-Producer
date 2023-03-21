@@ -300,13 +300,21 @@ const activityAppDB = {
 			subTitle: '',
 			cardData: [
 				{
-					title: '',
+					title: 'CHANGE from Previous Month',
 					count: 0,
 					color: 'text-red',
-					label: '',					
+					label: '',
 					fontSize: 72,
 					endAdornment: '%'
-				},				
+				},
+				{
+					title: 'Previous Month Lapse Rate',
+					count: 0,
+					color: 'text-red',
+					label: '',
+					fontSize: 72,
+					endAdornment: '%'
+				},
 			]
 		},
 		{
@@ -315,13 +323,21 @@ const activityAppDB = {
 			subTitle: '',
 			cardData: [
 				{
-					title: '',
+					title: 'CHANGE from Previous Month',
 					count: 0,
 					color: 'text-red',
-					label: '',					
+					label: '',
 					fontSize: 72,
 					endAdornment: '%'
-				},				
+				},
+				{
+					title: 'Previous Month Lapse Rate',
+					count: 0,
+					color: 'text-red',
+					label: '',
+					fontSize: 72,
+					endAdornment: '%'
+				},
 			]
 		},
 		{
@@ -330,13 +346,21 @@ const activityAppDB = {
 			subTitle: '',
 			cardData: [
 				{
-					title: '',
+					title: 'CHANGE from Previous Month',
 					count: 0,
 					color: 'text-red',
-					label: '',					
+					label: '',
 					fontSize: 72,
 					endAdornment: '%'
-				},				
+				},
+				{
+					title: 'Previous Month Lapse Rate',
+					count: 0,
+					color: 'text-red',
+					label: '',
+					fontSize: 72,
+					endAdornment: '%'
+				},
 			]
 		},
 		{
@@ -345,30 +369,46 @@ const activityAppDB = {
 			subTitle: '',
 			cardData: [
 				{
-					title: '',
+					title: 'CHANGE from Previous Month',
 					count: 0,
 					color: 'text-red',
-					label: '',					
+					label: '',
 					fontSize: 72,
 					endAdornment: '%'
-				},				
+				},
+				{
+					title: 'Previous Month Lapse Rate',
+					count: 0,
+					color: 'text-red',
+					label: '',
+					fontSize: 72,
+					endAdornment: '%'
+				},
 			]
-		},	
+		},
 		{
 			id: 'Dashboard_LapseRate_Bank_Panel',
 			title: 'Bank',
 			subTitle: '',
 			cardData: [
 				{
-					title: '',
+					title: 'CHANGE from Previous Month',
 					count: 0,
 					color: 'text-red',
-					label: '',					
+					label: '',
 					fontSize: 72,
 					endAdornment: '%'
-				},				
+				},
+				{
+					title: 'Previous Month Lapse Rate',
+					count: 0,
+					color: 'text-red',
+					label: '',
+					fontSize: 72,
+					endAdornment: '%'
+				},
 			]
-		},		
+		},
 		{
 			id: 'Dashboard_Personal_GoalVsActual_Chart',
 			title: "Personal Product Goal Vs Actual",			

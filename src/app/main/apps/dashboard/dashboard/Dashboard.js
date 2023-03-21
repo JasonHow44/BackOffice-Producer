@@ -34,7 +34,7 @@ import { getEntries, selectEntries } from '../store/entriesSlice';
 import { getUsers, selectUsers } from '../store/usersSlice';
 import { getVision, selectVision } from '../store/visionSlice';
 import { getLapseRate, selectLapseRate } from '../store/lapseRateSlice';
-import { Options as options, policies } from '../../../utils/Globals';
+import { Options as options, policies, months } from '../../../utils/Globals';
 import { dividing, ceil, getMain } from '../../../utils/Function';
 import { TabPanel } from '@material-ui/lab';
 
@@ -93,6 +93,9 @@ function Dashboard(props) {
 			let teamGoalsAndActual = {};
 			let household = 0;
 			let individual = 0;
+			let preMonthIndex = months.findIndex(item => item.value === period) - 1;
+			preMonthIndex = preMonthIndex > -1 ? preMonthIndex : months.findIndex(item => item.value === moment().format('MMMM')) - 1;
+			const preMonth = preMonthIndex > -1 ? months[preMonthIndex].value : moment().format('MMMM');
 			if (widgets.Dashboard_Multiline_GoalAndActual_Auto_Panel) {
 				policies.map(policy => {
 					// indGoalsAndActual[`${policy.value}@realGoal`] = 0;
@@ -224,14 +227,13 @@ function Dashboard(props) {
 				policies.map(policy => {
 					if (policy.value === 'Auto' || policy.value === 'Fire') {
 						let tempCardData = [];
-						let tempCard = {};
 						const cardData = widgets[`Dashboard_LapseRate_${policy.value}_Panel`].cardData;
-						tempCard = cardData[0];
-						tempCard = {
-							...tempCard,
-							count: `${main[production][period][UID][policy.value]['lapseRateChange']}`
-						};
-						tempCardData.push(tempCard);
+						tempCardData = cardData.map((item, index) => ({
+							...item,
+							count: `${
+								main[production][[period,preMonth][index]][UID][policy.value][['lapseRateChange', 'lapseRate'][index]]
+							}`
+						}));
 						widgets = {
 							...widgets,
 							[`Dashboard_LapseRate_${policy.value}_Panel`]: {
@@ -546,13 +548,13 @@ function Dashboard(props) {
 						enter={{ animation: 'transition.slideUpBigIn' }}
 					>
 						<div className="widget flex w-full p-12">
-							<fieldset className='"widget flex w-2/4 mr-12 rounded-8 border-1'>
+							<fieldset className='"widget flex w-2/6 mr-12 rounded-8 border-1'>
 								<legend>Multiline Percentage</legend>
 								<div className="widget flex w-full p-12">
 									<Panel data={data.widgets.Dashboard_Multiline_Percentage_Panel} type="One Number" />
 								</div>
 							</fieldset>
-							<fieldset className='"widget flex w-2/4 ml-12 rounded-8 border-1'>
+							<fieldset className='"widget flex w-4/6 ml-12 rounded-8 border-1'>
 								<legend>Lapse Rate</legend>
 								{policies.map(policy => {
 									if (policy.value === 'Auto' || policy.value === 'Fire') {
@@ -560,7 +562,7 @@ function Dashboard(props) {
 											<div className="widget flex w-full p-12">
 												<Panel
 													data={data.widgets[`Dashboard_LapseRate_${policy.value}_Panel`]}
-													type="One Number"
+													type="Two Number nowrap"
 												/>
 											</div>
 										);
