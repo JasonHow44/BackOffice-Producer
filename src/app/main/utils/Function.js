@@ -35,14 +35,30 @@ export const formattedDate = date => {
 	return `${mm}/${dd}/${yyyy}`;
 };
 
-export const formattedString = val => {
+export const formattedString = (val, startAdornment = '', endAdornment = '') => {
 	if (IsNumeric(val)) {
-		return val === 0 ? '' : ceil(val);
+		return val === 0
+			? ''
+			: startAdornment === '$'
+			? `${startAdornment}${ceil(val).toFixed(2)}${endAdornment}`
+			: `${startAdornment}${ceil(val)}${endAdornment}`;
 	}
 	if (IsNumeric(val) && isNaN(val)) {
 		return '';
 	}
-	return val;
+	if (val === 'NaN') {
+		return `${val}${endAdornment}`;
+	}
+	if (val === undefined) {
+		return '';
+	}
+
+	if (Number.isNaN(val)) {
+		return '';
+	}
+	return startAdornment == '$'
+		? `${startAdornment}${(val - 0).toFixed(2)}${endAdornment}`
+		: `${startAdornment}${val}${endAdornment}`;
 };
 
 export const formattedNumber = val => {

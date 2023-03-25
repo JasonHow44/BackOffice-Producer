@@ -34,11 +34,11 @@ const visionAppDB = {
 					{id: 'Bank', value: 'Bank', type:false, color: ''},
 				],
 				rows: [
-					{ id: "Average Bonus", value: "Average Bonus", color: "" },
-					{ id: "Average Annual Premium", value: "Average Annual Premium", color: "" },
+					{ id: "Average Commission", value: "Average Commission", color: "", endAdornment: "%"  },
+					{ id: "Average Annual Premium", value: "Average Annual Premium", color: "", startAdornment: "$" },
 				],
 				tableContent: {
-					"Average Bonus": {
+					"Average Commission": {
 						'Auto': 0,
 						'Fire': 0,
 						'Life': 0,

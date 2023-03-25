@@ -30,12 +30,17 @@ import { getUsers, selectUsers } from '../store/usersSlice';
 import { getVision, selectVision, saveVision } from '../store/visionSlice';
 import { getBonusPlans, selectBonusPlans } from '../store/bonusPlansSlice';
 import { getWidgets, selectWidgets } from '../store/widgetsSlice';
-import { months1, policies, incomeAvgsRows, incomeGoalsRows, incomeGoalsHeaders, incomeBonusesHeaders, toUntrimed } from '../../../utils/Globals';
+import { months1, policies, incomeGoalsColumns, incomeBonusesColumns, incomeAvgsRows, incomeGoalsRows, incomeGoalsHeaders, incomeBonusesHeaders, toUntrimed } from '../../../utils/Globals';
 import { ceil, swap, getLevel, getOtherActivityBonus } from '../../../utils/Function';
 import { dateComparer } from '@material-ui/data-grid';
 
 const belongTo = sessionStorage.getItem('@BELONGTO');
 const UID = sessionStorage.getItem('@UID');
+
+const goalsTableColumns = incomeGoalsColumns;
+const bonusesTableColumns = incomeBonusesColumns;
+const goalsTableHeader = incomeGoalsHeaders;
+const bonusesTableHeader = incomeBonusesHeaders;
 
 let avgsTableContent = {};
 let goalsTableContent = {};
@@ -117,7 +122,45 @@ function IncomeGoals(props) {
 		}
 	}, [users]);
 
-	useEffect(() => { 	
+	useEffect(() => {
+		let otherActivityBonus = {};
+		if (bonusPlans.length > 0 && bonusPlans[0].hasOwnProperty('otherActivityBonus')) {
+			otherActivityBonus = bonusPlans[0].otherActivityBonus;
+			// console.log('OtherActivityBonus===', otherActivityBonus);
+		}
+
+		if (!_.isEmpty(otherActivityBonus) && goalsTableColumns.length === 3) {
+			goalsTableColumns.push({
+				id: 'otherActivityGoals',
+				title: 'OTHER ACTIVY GOALS',
+				color: '',
+				colSpan: Object.keys(otherActivityBonus).length
+			});
+
+			bonusesTableColumns.push({
+				id: 'otherActivityBonuses',
+				title: 'Other Activity Bonuses',
+				color: '',
+				colSpan: Object.keys(otherActivityBonus).length
+			});
+
+			Object.keys(otherActivityBonus).map(key => {
+				const item = otherActivityBonus[key];
+				goalsTableHeader.push({
+					id: item.id,
+					value: item.name,
+					type: false,
+					color: ''
+				});
+				bonusesTableHeader.push({
+					id: item.id,
+					value: item.name,
+					type: false,
+					color: ''
+				});
+			});
+		}
+
 		incomeAvgsRows.map((row) => {
 			avgsTableContent[row.value] = {};
 			policies.map((policy) => {
@@ -142,11 +185,11 @@ function IncomeGoals(props) {
 				const visionData = vision[0][user];
 
 				// goals			
-				Object.keys(visionData['Goals']).map((key) => {
-					if(key!=="id") 
-						Object.keys(visionData['Goals'][key]).map((valKey) => {						
-							goalsTableContent[key][toUntrimed[valKey]] = parseFloat(visionData['Goals'][key][valKey]);
-						});				
+				months1.map(month => {
+					goalsTableContent[month] = {};
+					goalsTableHeader.map(header => {
+						goalsTableContent[month][header.value] = visionData.Goals[month][header.id];
+					});
 				});
 
 				// averages
@@ -167,9 +210,16 @@ function IncomeGoals(props) {
 			}
 		} 
 
-		console.log('---------temp',avgsTableContent, goalsTableContent, bonusesTableContent)
-		setMain({ avgsTableContent, goalsTableContent, bonusesTableContent });
-	}, [vision, user]);
+		setMain({ 
+			avgsTableContent,
+			goalsTableColumns,
+			goalsTableHeader,
+			goalsTableContent,
+			bonusesTableColumns,
+			bonusesTableHeader,
+			bonusesTableContent
+		});
+	}, [vision, user, bonusPlans]);
 	
 	useEffect(() => { 
 		if(!_.isEmpty(widgets) && !_.isEmpty(main)) {
@@ -185,8 +235,10 @@ function IncomeGoals(props) {
 				widgets = { 
 					...widgets, Vision_IncomeGoals_Goals_Table: { 
 						...widgets.Vision_IncomeGoals_Goals_Table, table: {
-							...widgets.Vision_IncomeGoals_Goals_Table.table, tableContent: 
-								main.goalsTableContent
+							...widgets.Vision_IncomeGoals_Goals_Table.table,
+							columns: main.goalsTableColumns,
+							headers: main.goalsTableHeader,
+							tableContent: main.goalsTableContent
 						}						
 					}
 				};
@@ -363,7 +415,15 @@ function IncomeGoals(props) {
 		} 
 		
 		console.log('---main', main)
-		setMain({ avgsTableContent, goalsTableContent, bonusesTableContent });
+		setMain({
+			avgsTableContent,
+			goalsTableColumns,
+			goalsTableHeader,
+			goalsTableContent,
+			bonusesTableColumns,
+			bonusesTableHeader,
+			bonusesTableContent
+		});
 	}, [cell]);
 
 	function handleInputChange(property) {
