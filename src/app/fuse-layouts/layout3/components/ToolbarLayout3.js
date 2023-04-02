@@ -63,7 +63,7 @@ function ToolbarLayout3(props) {
 
 						{/* <LanguageSwitcher /> */}
 
-						<FullScreenToggle />
+						{/* <FullScreenToggle /> */}
 
 						<QuickPanelToggleButton />
 

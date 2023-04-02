@@ -1,21 +1,51 @@
-import Icon from '@material-ui/core/Icon';
-import IconButton from '@material-ui/core/IconButton';
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { toggleQuickPanel } from './store/stateSlice';
+import { Button, Icon, IconButton } from '@material-ui/core';
+import ModalVideo from "react-modal-video";
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import "react-modal-video/scss/modal-video.scss";
 
 function QuickPanelToggleButton(props) {
-	const dispatch = useDispatch();
+	const [isOpen, setOpen] = useState(false);
+	const location = useLocation();
+	const { pathname } = location;
+
+	const [videoId, setVideoId] = useState()
+
+	useEffect(() => {
+		const videoMap = {
+			'/apps/dashboard/dashboard': 'UYnxmea9ABg',
+			'/apps/vision/income-goals': '0X8NYnT2tqE',
+			'/apps/bonus-plan/all': 'w6d6j4zIYYE',
+			'/apps/enter-sales/auto-entry': 'RCOIOlr1nr0',
+			'/apps/income/payroll': '5yobtk9u4Kg',
+			'/apps/income/possible-money': 'v-T-JM5SpFE',
+			'/apps/production/sales-results': 'JNJxusgMcS8',
+			'/apps/production/product-line': 'APRKF7L-yus',
+			'/apps/production/multiline': '3LbOLu3f2-Q',
+			'/apps/activity/appRegister': 'zVhEjT44clI'
+		}
+		setVideoId(videoMap[pathname])
+	}, [pathname])
 
 	return (
-		<IconButton className="w-40 h-40" onClick={ev => dispatch(toggleQuickPanel())}>
-			{props.children}
-		</IconButton>
+		<>
+			<ModalVideo
+				channel="youtube"
+				autoplay
+				isOpen={isOpen}
+				videoId={videoId}
+				onClose={() => setOpen(false)}
+			/>
+			<Button className="capitalize" onClick={() => setOpen(true)}>
+				Tutorial&nbsp;
+				{props.children}
+			</Button>
+		</>
 	);
 }
 
 QuickPanelToggleButton.defaultProps = {
-	children: <Icon>bookmarks</Icon>
+	children: <Icon>ondemand_video</Icon>
 };
 
 export default QuickPanelToggleButton;
