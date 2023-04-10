@@ -36,6 +36,7 @@ export const formattedDate = date => {
 };
 
 export const formattedString = (val, startAdornment = '', endAdornment = '') => {
+	console.log(val, startAdornment);
 	if (IsNumeric(val)) {
 		return val === 0
 			? ''

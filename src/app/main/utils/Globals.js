@@ -320,33 +320,25 @@ export const incomeGoalsHeaders = [
 	{ id: 'healthPolicies', value: 'Health Policies', type: false, color: '' },
 	{ id: 'bankProducts', value: 'Bank Products', type: false, color: '' },
 	{ id: 'totalProducts', value: 'Total Products', type: false, color: '' },
-	{ id: 'annualAutoPremium', value: 'Annual Auto Premium', type: false, color: '' },
-	{ id: 'annualFirePremium', value: 'Annual Fire Premium', type: false, color: '' },
-	{ id: 'annualLifePremium', value: 'Annual Life Premium', type: false, color: '' },
-	{ id: 'annualHealthPremium', value: 'Annual Health Premium', type: false, color: '' },
-	{ id: 'agencyBankComm', value: 'Agency Bank Comm', type: false, color: '' },
-	{ id: 'totalAnnualPremium', value: 'Total Annual Premium', type: false, color: '' }
+	{ id: 'annualAutoPremium', value: 'Annual Auto Premium', type: false, color: '', startAdornment: '$' },
+	{ id: 'annualFirePremium', value: 'Annual Fire Premium', type: false, color: '', startAdornment: '$' },
+	{ id: 'annualLifePremium', value: 'Annual Life Premium', type: false, color: '', startAdornment: '$' },
+	{ id: 'annualHealthPremium', value: 'Annual Health Premium', type: false, color: '', startAdornment: '$' },
+	{ id: 'agencyBankComm', value: 'Agency Bank Comm', type: false, color: '', startAdornment: '$' },
+	{ id: 'totalAnnualPremium', value: 'Total Annual Premium', type: false, color: '', startAdornment: '$' }
 ];
 
 export const incomeBonusesHeaders = [
-	{ id: 'autoPolicyBonuses', value: 'Auto Policy Bonuses', type: false, color: '' },
-	{ id: 'firePolicyBonuses', value: 'Fire Policy Bonuses', type: false, color: '' },
-	{ id: 'lifePolicyBonuses', value: 'Life Policy Bonuses', type: false, color: '' },
-	{ id: 'healthPolicyBonuses', value: 'Health Policy Bonuses', type: false, color: '' },
-	{ id: 'bankProductBonuses', value: 'Bank Product Bonuses', type: false, color: '' },
-	{ id: 'individualAutoTargetBonuses', value: 'Individual Auto Target Bonuses', type: false, color: '' },
-	{ id: 'individualFireTargetBonuses', value: 'Individual Fire Target Bonuses', type: false, color: '' },
-	{ id: 'individualLifeTargetBonuses', value: 'Individual Life Target Bonuses', type: false, color: '' },
-	{ id: 'individualHealthTargetBonuses', value: 'Individual Health Target Bonuses', type: false, color: '' },
-	{ id: 'individualBankTargetBonuses', value: 'Individual Bank Target Bonuses', type: false, color: '' },
-	{ id: 'multilineReviewApptKept', value: 'Multiline Review Appt. Kept', type: false, color: '' },
-	{ id: 'ifr', value: 'IFR', type: false, color: '' },
-	{ id: 'autoPoliciesBoughtIn', value: 'Auto Policies Bought In', type: false, color: '' },
-	{ id: 'firePoliciesBoughtIn', value: 'Fire Policies Bought In', type: false, color: '' },
-	{ id: 'lifePoliciesBoughtIn', value: 'Life Policies Bought In', type: false, color: '' },
-	{ id: 'healthPoliciesBoughtIn', value: 'Health Policies Bought In', type: false, color: '' },
-	{ id: 'bankDocumentsBoughtIn', value: 'Bank Documents Bought In', type: false, color: '' },
-	{ id: 'ifrCompleted', value: 'IFR Completed', type: false, color: '' }
+	{ id: 'autoPolicyBonuses', value: 'Auto Policy Bonuses', type: false, color: '', startAdornment: '$' },
+	{ id: 'firePolicyBonuses', value: 'Fire Policy Bonuses', type: false, color: '', startAdornment: '$' },
+	{ id: 'lifePolicyBonuses', value: 'Life Policy Bonuses', type: false, color: '', startAdornment: '$' },
+	{ id: 'healthPolicyBonuses', value: 'Health Policy Bonuses', type: false, color: '', startAdornment: '$' },
+	{ id: 'bankProductBonuses', value: 'Bank Product Bonuses', type: false, color: '', startAdornment: '$' },
+	{ id: 'individualAutoTargetBonuses', value: 'Individual Auto Target Bonuses', type: false, color: '', startAdornment: '$' },
+	{ id: 'individualFireTargetBonuses', value: 'Individual Fire Target Bonuses', type: false, color: '', startAdornment: '$' },
+	{ id: 'individualLifeTargetBonuses', value: 'Individual Life Target Bonuses', type: false, color: '', startAdornment: '$' },
+	{ id: 'individualHealthTargetBonuses', value: 'Individual Health Target Bonuses', type: false, color: '', startAdornment: '$' },
+	{ id: 'individualBankTargetBonuses', value: 'Individual Bank Target Bonuses', type: false, color: '', startAdornment: '$' }
 ];
 
 export const incomeAvgsRows = [

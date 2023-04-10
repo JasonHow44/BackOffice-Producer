@@ -192,15 +192,7 @@ function Widget(props) {
 													{!props.editable &&
 													headers.length > 0 &&
 													formattedString(tableContent[rowKey][headers[colNum].value]) &&
-													(colKey === 'Annual Auto Premium' ||
-														colKey === 'Annual Fire Premium' ||
-														colKey === 'Annual Life Premium' ||
-														colKey === 'Annual Health Premium' ||
-														colKey === 'Annual Bank Premium' ||
-														colKey === 'Total Annual Premium')
-														? '$' +
-														  formattedString(tableContent[rowKey][headers[colNum].value])
-														: formattedString(tableContent[rowKey][headers[colNum].value], rows[rowNum].startAdornment, rows[rowNum].endAdornment)}
+													formattedString(tableContent[rowKey][headers[colNum].value], headers[colNum].startAdornment || rows[rowNum].startAdornment, rows[rowNum].endAdornment)}
 
 													{props.editable && (
 														<TextInput

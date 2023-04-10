@@ -150,13 +150,15 @@ function IncomeGoals(props) {
 					id: item.id,
 					value: item.name,
 					type: false,
-					color: ''
+					color: '',
+					startAdornment: '$'
 				});
 				bonusesTableHeader.push({
 					id: item.id,
 					value: item.name,
 					type: false,
-					color: ''
+					color: '',
+					startAdornment: '$'
 				});
 			});
 		}
@@ -245,8 +247,9 @@ function IncomeGoals(props) {
 				widgets = { 
 					...widgets, Vision_IncomeGoals_Bonuses_Table: { 
 						...widgets.Vision_IncomeGoals_Bonuses_Table, table: {
-							...widgets.Vision_IncomeGoals_Bonuses_Table.table, tableContent: 
-								main.bonusesTableContent
+							...widgets.Vision_IncomeGoals_Bonuses_Table.table,
+							headers: main.bonusesTableHeader,
+							tableContent: main.bonusesTableContent
 						}						
 					}
 				}		
