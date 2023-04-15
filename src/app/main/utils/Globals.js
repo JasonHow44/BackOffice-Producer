@@ -267,6 +267,13 @@ export const incomeBonusesColumns = [
 		title: 'Bonuses: Initial Policy & Product Bonus',
 		color: '',
 		colSpan: 5
+	},
+	{
+		id: 'total',
+		title: 'Total Bonus Goal',
+		color: '',
+		rowSpan: 2,
+		colSpan: 1
 	}
 ];
 
@@ -334,11 +341,41 @@ export const incomeBonusesHeaders = [
 	{ id: 'lifePolicyBonuses', value: 'Life Policy Bonuses', type: false, color: '', startAdornment: '$' },
 	{ id: 'healthPolicyBonuses', value: 'Health Policy Bonuses', type: false, color: '', startAdornment: '$' },
 	{ id: 'bankProductBonuses', value: 'Bank Product Bonuses', type: false, color: '', startAdornment: '$' },
-	{ id: 'individualAutoTargetBonuses', value: 'Individual Auto Target Bonuses', type: false, color: '', startAdornment: '$' },
-	{ id: 'individualFireTargetBonuses', value: 'Individual Fire Target Bonuses', type: false, color: '', startAdornment: '$' },
-	{ id: 'individualLifeTargetBonuses', value: 'Individual Life Target Bonuses', type: false, color: '', startAdornment: '$' },
-	{ id: 'individualHealthTargetBonuses', value: 'Individual Health Target Bonuses', type: false, color: '', startAdornment: '$' },
-	{ id: 'individualBankTargetBonuses', value: 'Individual Bank Target Bonuses', type: false, color: '', startAdornment: '$' }
+	{
+		id: 'individualAutoTargetBonuses',
+		value: 'Individual Auto Target Bonuses',
+		type: false,
+		color: '',
+		startAdornment: '$'
+	},
+	{
+		id: 'individualFireTargetBonuses',
+		value: 'Individual Fire Target Bonuses',
+		type: false,
+		color: '',
+		startAdornment: '$'
+	},
+	{
+		id: 'individualLifeTargetBonuses',
+		value: 'Individual Life Target Bonuses',
+		type: false,
+		color: '',
+		startAdornment: '$'
+	},
+	{
+		id: 'individualHealthTargetBonuses',
+		value: 'Individual Health Target Bonuses',
+		type: false,
+		color: '',
+		startAdornment: '$'
+	},
+	{
+		id: 'individualBankTargetBonuses',
+		value: 'Individual Bank Target Bonuses',
+		type: false,
+		color: '',
+		startAdornment: '$'
+	}
 ];
 
 export const incomeAvgsRows = [

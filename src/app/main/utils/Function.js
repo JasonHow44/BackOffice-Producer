@@ -12,7 +12,7 @@ export const swap = json => {
 };
 
 export const ceil = number => {
-	return Math.ceil(number * 100) / 100;
+	return Math.round(number * 100) / 100;
 };
 
 export const dividing = (n1, n2) => {
@@ -36,7 +36,6 @@ export const formattedDate = date => {
 };
 
 export const formattedString = (val, startAdornment = '', endAdornment = '') => {
-	console.log(val, startAdornment);
 	if (IsNumeric(val)) {
 		return val === 0
 			? ''

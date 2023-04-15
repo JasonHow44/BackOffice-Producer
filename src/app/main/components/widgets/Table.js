@@ -115,7 +115,7 @@ function Widget(props) {
 						<TableRow>
 							{headers.map((cell, col) => {
 								return (
-									<TableCell
+									!cell.hidden && <TableCell
 										key={cell.id}
 										component="th"
 										scope="rowNum"

@@ -137,12 +137,13 @@ function IncomeGoals(props) {
 				colSpan: Object.keys(otherActivityBonus).length
 			});
 
-			bonusesTableColumns.push({
+			bonusesTableColumns.splice(bonusesTableColumns.length - 1, 0, {
 				id: 'otherActivityBonuses',
 				title: 'Other Activity Bonuses',
 				color: '',
 				colSpan: Object.keys(otherActivityBonus).length
 			});
+			console.log(bonusesTableColumns);
 
 			Object.keys(otherActivityBonus).map(key => {
 				const item = otherActivityBonus[key];
@@ -160,6 +161,15 @@ function IncomeGoals(props) {
 					color: '',
 					startAdornment: '$'
 				});
+			});
+
+			bonusesTableHeader.push({
+				id: 'totalBonusGoal',
+				value: 'Total Bonus Goal',
+				type: false,
+				hidden: true,
+				color: '',
+				startAdornment: '$'
 			});
 		}
 
@@ -204,10 +214,15 @@ function IncomeGoals(props) {
 
 				// bonuses
 				Object.keys(visionData['Bonuses']).map((key) => {
-					if(key!=="id") 
-						Object.keys(visionData['Bonuses'][key]).map((valKey) => {						
-							bonusesTableContent[key][toUntrimed[valKey]] = parseFloat(visionData['Bonuses'][key][valKey]);
-						});				
+					if(key!=="id") {
+						const total = Object.keys(visionData['Bonuses'][key]).reduce((sum, valKey) => {
+							bonusesTableContent[key][toUntrimed[valKey]] = parseFloat(visionData['Bonuses'][key][valKey]||0);
+							return sum + bonusesTableContent[key][toUntrimed[valKey]]
+						}, 0);
+						if (bonusesTableHeader.find(item => item.value === 'Total Bonus Goal')) {
+							bonusesTableContent[key]['Total Bonus Goal'] = total
+						}
+					}
 				});
 			}
 		} 
@@ -248,6 +263,7 @@ function IncomeGoals(props) {
 					...widgets, Vision_IncomeGoals_Bonuses_Table: { 
 						...widgets.Vision_IncomeGoals_Bonuses_Table, table: {
 							...widgets.Vision_IncomeGoals_Bonuses_Table.table,
+							columns: main.bonusesTableColumns,
 							headers: main.bonusesTableHeader,
 							tableContent: main.bonusesTableContent
 						}						
