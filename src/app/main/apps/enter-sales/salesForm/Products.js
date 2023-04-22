@@ -83,8 +83,8 @@ const alignBonus = bonus => {
 			Object.keys(bonus[0][policy]).map(itemId => {
 				tempBonusLists = {
 					...tempBonusLists,
-
-					[bonus[0][policy][itemId].name]: bonus[0][policy][itemId].percent
+					[bonus[0][policy][itemId].name]: bonus[0][policy][itemId].percent,
+					[bonus[0][policy][itemId].name + '@Dollar']: bonus[0][policy][itemId].dollar
 				};
 			});
 		});
@@ -491,6 +491,19 @@ function Products() {
 		return temp;
 	}
 
+	function dollarBonus(policyPremium, creditType, creditPercent, typeOfProduct) {
+		let result = 0
+
+		if (bonusLists[typeOfProduct]) {
+			result = parseFloat(policyPremium) * parseFloat(creditType === 'solo_credit' ? 100 : creditPercent) / 100
+			result *= (parseFloat(bonusLists[typeOfProduct]) / 100)
+		} else if (bonusLists[typeOfProduct + '@Dollar']) {
+			result = parseFloat(bonusLists[typeOfProduct + '@Dollar'])
+		}
+
+		return Math.round(result * 100) / 100
+	}
+
 	function onSave() {
 		if (checkValidation()) {
 			let bonusValues = getBonusArange();
@@ -522,14 +535,7 @@ function Products() {
 				if (state.typeOfProduct && state.policyType.includes('Entries')) {
 					form = {
 						...form,
-						dollarBonus:
-							Math.ceil(
-								((parseFloat(state.policyPremium) *
-									parseInt(state.creditTypeAuto === 'solo_credit' ? 100 : state.creditPercentAuto)) /
-									100) *
-									(parseInt(bonusLists[state.typeOfProduct]) / 100) *
-									100
-							) / 100,
+						dollarBonus: dollarBonus(state.policyPremium, state.creditTypeAuto, state.creditPercentAuto, state.typeOfProduct),
 						policyType: ['Entries'],
 						typeOfProduct: state.typeOfProduct,
 						policyPremium: state.policyPremium,
@@ -543,14 +549,7 @@ function Products() {
 				if (state.typeOfProductFire && state.policyType.includes('FireEntries')) {
 					form = {
 						...form,
-						dollarBonus:
-							Math.ceil(
-								((parseFloat(state.policyPremiumFire) *
-									parseInt(state.creditTypeFire === 'solo_credit' ? 100 : state.creditPercentFire)) /
-									100) *
-									(parseInt(bonusLists[state.typeOfProductFire]) / 100) *
-									100
-							) / 100,
+						dollarBonus: dollarBonus(state.policyPremiumFire, state.creditTypeFire, state.creditPercentFire, state.typeOfProductFire),
 						policyType: ['FireEntries'],
 						typeOfProductFire: state.typeOfProductFire,
 						policyPremium: state.policyPremiumFire,
@@ -565,16 +564,7 @@ function Products() {
 				if (state.typeOfProductHealth && state.policyType.includes('HealthEntries')) {
 					form = {
 						...form,
-						dollarBonus:
-							Math.ceil(
-								((parseFloat(state.policyPremiumHealth) *
-									parseInt(
-										state.creditTypeHealth === 'solo_credit' ? 100 : state.creditPercentHealth
-									)) /
-									100) *
-									(parseInt(bonusLists[state.typeOfProductHealth]) / 100) *
-									100
-							) / 100,
+						dollarBonus: dollarBonus(state.policyPremiumHealth, state.creditTypeHealth, state.creditPercentHealth, state.typeOfProductHealth),
 						policyType: ['HealthEntries'],
 						typeOfProductHealth: state.typeOfProductHealth,
 						policyPremium: state.policyPremiumHealth,
@@ -588,14 +578,7 @@ function Products() {
 				if (state.typeOfProductLife && state.policyType.includes('LifeEntries')) {
 					form = {
 						...form,
-						dollarBonus:
-							Math.ceil(
-								((parseFloat(state.policyPremiumLife) *
-									parseInt(state.creditTypeLife === 'solo_credit' ? 100 : state.creditPercentLife)) /
-									100) *
-									(parseInt(bonusLists[state.typeOfProductLife]) / 100) *
-									100
-							) / 100,
+						dollarBonus: dollarBonus(state.policyPremiumLife, state.creditTypeLife, state.creditPercentLife, state.typeOfProductLife),
 						policyType: ['LifeEntries'],
 						typeOfProductLife: state.typeOfProductLife,
 						policyPremium: state.policyPremiumLife,
@@ -610,14 +593,7 @@ function Products() {
 				if (state.typeOfProductBank && state.policyType.includes('BankEntries')) {
 					form = {
 						...form,
-						dollarBonus:
-							Math.ceil(
-								((parseFloat(state.policyPremiumBank) *
-									parseInt(state.creditTypeBank === 'solo_credit' ? 100 : state.creditPercentBank)) /
-									100) *
-									(parseInt(bonusLists[state.typeOfProductBank]) / 100) *
-									100
-							) / 100,
+						dollarBonus: dollarBonus(state.policyPremiumBank, state.creditTypeBank, state.creditPercentBank, state.typeOfProductBank),
 						policyType: ['BankEntries'],
 						typeOfProductBank: state.typeOfProductBank,
 						policyPremium: state.policyPremiumBank,

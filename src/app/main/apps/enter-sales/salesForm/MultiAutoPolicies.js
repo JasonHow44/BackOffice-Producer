@@ -64,19 +64,15 @@ const creditLists = [
 ];
 
 const alignBonus = bonus => {
-	let tempBonusLists = {};
+	var tempBonusLists = {};
 	if (bonus.length > 0) {
-		Object.keys(bonus[0]).map(id => {
-			Object.keys(bonus[0][id]).map(policy => {
-				Object.keys(bonus[0][id][policy]).map(itemId => {
-					tempBonusLists = {
-						...tempBonusLists,
-						[id]: {
-							...tempBonusLists[id],
-							[bonus[0][id][policy][itemId].name]: bonus[0][id][policy][itemId].percent
-						}
-					};
-				});
+		Object.keys(bonus[0]).map(policy => {
+			Object.keys(bonus[0][policy]).map(itemId => {
+				tempBonusLists = {
+					...tempBonusLists,
+					[bonus[0][policy][itemId].name]: bonus[0][policy][itemId].percent,
+					[bonus[0][policy][itemId].name + '@Dollar']: bonus[0][policy][itemId].dollar
+				};
 			});
 		});
 	}
@@ -273,6 +269,19 @@ function Products() {
 		});
 	}
 
+	function dollarBonus(policyPremium, creditType, creditPercent, typeOfProduct) {
+		let result = 0
+
+		if (bonusLists[typeOfProduct]) {
+			result = parseFloat(policyPremium) * parseFloat(creditType === 'solo_credit' ? 100 : creditPercent) / 100
+			result *= (parseFloat(bonusLists[typeOfProduct]) / 100)
+		} else if (bonusLists[typeOfProduct + '@Dollar']) {
+			result = parseFloat(bonusLists[typeOfProduct + '@Dollar'])
+		}
+
+		return Math.round(result * 100) / 100
+	}
+
 	function onSave() {
 		console.log(checkValidation());
 		if (checkValidation()) {
@@ -303,14 +312,7 @@ function Products() {
 				if (item.datePolicyIsIssued) {
 					form = {
 						...form,
-						dollarBonus:
-							Math.ceil(
-								((parseFloat(item.policyPremium) *
-									parseInt(item.creditTypeAuto === 'solo_credit' ? 100 : item.creditPercentAuto)) /
-									100) *
-									(parseInt(bonusLists[uid][item.typeOfProduct]) / 100) *
-									100
-							) / 100,
+						dollarBonus: dollarBonus(item.policyPremium, item.creditTypeAuto, item.creditPercentAuto, item.typeOfProduct),
 						policyType: ['Entries'],
 						typeOfProduct: item.typeOfProduct,
 						policyPremium: item.policyPremium,
@@ -326,17 +328,7 @@ function Products() {
 				} else {
 					form = {
 						...form,
-						dollarBonus: item.datePolicyIsIssued
-							? Math.ceil(
-									((parseFloat(item.policyPremium) *
-										parseInt(
-											item.creditTypeAuto === 'solo_credit' ? 100 : item.creditPercentAuto
-										)) /
-										100) *
-										(parseInt(bonusLists[uid][item.typeOfProduct]) / 100) *
-										100
-							  ) / 100
-							: '',
+						dollarBonus: item.datePolicyIsIssued ? dollarBonus(item.policyPremium, item.creditTypeAuto, item.creditPercentAuto, item.typeOfProduct) : '',
 						policyType: ['Entries'],
 						typeOfProduct: item.typeOfProduct,
 						policyPremium: item.policyPremium,
