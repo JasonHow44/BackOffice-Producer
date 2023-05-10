@@ -130,6 +130,7 @@ function Products() {
 		typeOfProductLife: '',
 		policyPremium: '',
 		sourceOfBusiness: '',
+		otherActivity: '',
 		adjustments: '',
 		dollarBonus: '',
 		policyType: ['Entries'],
@@ -144,6 +145,7 @@ function Products() {
 		previousPolicyNumberValidation: false,
 		policyHolderType: 'individual',
 		productLists: [],
+		othersList: [],
 		fireProductList: [],
 		healthProductList: [],
 		lifeProductList: [],
@@ -179,6 +181,7 @@ function Products() {
 		var tempLifeBonus = [];
 		var tempBankBonus = [];
 		var tempMarketing = [];
+		var tempOthers = [];
 		var temp = [];
 		if (marketing.length > 0) {
 			Object.keys(marketing[0]).map(i => {
@@ -190,6 +193,10 @@ function Products() {
 				temp.push({ item: item.data.displayName, value: item.uid });
 			});
 			// temp.push({ item: 'Office Count', value: 'OfficeCount' });
+		}
+
+		if (bonus.length) {
+			tempOthers = Object.values(bonus[0].otherActivityBonus);
 		}
 
 		if (routeParams.id === 'edit' && editData) {
@@ -234,6 +241,7 @@ function Products() {
 					...editData,
 					marketings: tempMarketing,
 					productLists: tempBonus,
+					othersList: tempOthers,
 					fireProductList: tempFireBonus,
 					healthProductList: tempHealthBonus,
 					lifeProductList: tempLifeBonus,
@@ -305,6 +313,7 @@ function Products() {
 					...state,
 					marketings: tempMarketing,
 					productLists: tempBonus,
+					othersList: tempOthers,
 					fireProductList: tempFireBonus,
 					healthProductList: tempHealthBonus,
 					lifeProductList: tempLifeBonus,
@@ -501,6 +510,11 @@ function Products() {
 			result = parseFloat(bonusLists[typeOfProduct + '@Dollar'])
 		}
 
+		if (state.otherActivity) {
+			const activity = state.othersList.find(item => item.name === state.otherActivity)
+			result += activity.dollar || 0;
+		}
+
 		return Math.round(result * 100) / 100
 	}
 
@@ -523,6 +537,7 @@ function Products() {
 				policyHolderType: state.policyHolderType,
 				policyPremium: parseFloat(state.policyPremium),
 				sourceOfBusiness: state.sourceOfBusiness,
+				otherActivity: state.otherActivity,
 				adjustments: state.adjustments,
 				dollarBonus: state.dollarBonus,
 				policies: route==="edit"?state.policies: state.policyType,
@@ -911,6 +926,19 @@ function Products() {
 										variant="outlined"
 										value={state.sourceOfBusiness}
 										validation="sourceOfBusiness"
+										handleChangeValue={handleChangeValue}
+										willvalidation={false}
+									/>
+									<SelectBox
+										id="outlined-basic"
+										label="Other Activity"
+										data={state.othersList.map(item => ({
+											item: item.name,
+											value: item.name
+										}))}
+										variant="outlined"
+										value={state.otherActivity}
+										validation="otherActivity"
 										handleChangeValue={handleChangeValue}
 										willvalidation={false}
 									/>

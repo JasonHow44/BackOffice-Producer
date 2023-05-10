@@ -82,6 +82,13 @@ const rows = [
 		sort: true
 	},
 	{
+		id: 'otherActivity',
+		align: 'center',
+		disablePadding: false,
+		label: 'Other Activity',
+		sort: true
+	},
+	{
 		id: 'policyType',
 		align: 'center',
 		disablePadding: false,

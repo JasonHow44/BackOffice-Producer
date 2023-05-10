@@ -121,6 +121,7 @@ function Products() {
 		datePolicyIsWritten: new Date(),
 		policyType: ['Entries'],
 		sourceOfBusiness: '',
+		otherActivity: '',
 		adjustments: '',
 		dollarBonus: '',
 		policyHolderNameValidation: false,
@@ -131,7 +132,8 @@ function Products() {
 		marketings: [],
 		policyHolderType: 'household',
 		tempUserList: [],
-		productLists: []
+		productLists: [],
+		othersList: []
 	});
 
 	useEffect(() => {
@@ -157,6 +159,7 @@ function Products() {
 		const tempUsers = [];
 		const tempMarketing = [];
 		const tempProductList = [];
+		let tempOthers = [];
 		const tempBonus = [];
 		const tempFireBonus = [];
 		const tempHealthBonus = [];
@@ -185,6 +188,7 @@ function Products() {
 		}
 
 		if (bonus.length > 0) {
+			tempOthers = Object.values(bonus[0].otherActivityBonus);
 			Object.keys(bonus[0].autoBonus).map(item => {
 				tempBonus.push({
 					item: bonus[0].autoBonus[item].name,
@@ -198,6 +202,7 @@ function Products() {
 			tempUserList: tempUsers,
 			marketings: tempMarketing,
 			productLists: tempBonus,
+			othersList: tempOthers,
 			fireProductList: tempFireBonus,
 			healthProductList: tempHealthBonus,
 			lifeProductList: tempLifeBonus,
@@ -279,6 +284,11 @@ function Products() {
 			result = parseFloat(bonusLists[typeOfProduct + '@Dollar'])
 		}
 
+		if (state.otherActivity) {
+			const activity = state.othersList.find(item => item.name === state.otherActivity)
+			result += activity.dollar || 0;
+		}
+
 		return Math.round(result * 100) / 100
 	}
 
@@ -302,6 +312,7 @@ function Products() {
 				typeOfProduct: state.typeOfProduct,
 				policyPremium: parseFloat(state.policyPremium),
 				sourceOfBusiness: state.sourceOfBusiness,
+				otherActivity: state.otherActivity,
 				adjustments: state.adjustments,
 				dollarBonus: state.dollarBonus,
 				belongTo,
@@ -472,6 +483,19 @@ function Products() {
 										variant="outlined"
 										value={state.sourceOfBusiness}
 										validation="sourceOfBusiness"
+										handleChangeValue={handleChangeValue}
+										willvalidation={false}
+									/>
+									<SelectBox
+										id="outlined-basic"
+										label="Other Activity"
+										data={state.othersList.map(item => ({
+											item: item.name,
+											value: item.name
+										}))}
+										variant="outlined"
+										value={state.otherActivity}
+										validation="otherActivity"
 										handleChangeValue={handleChangeValue}
 										willvalidation={false}
 									/>

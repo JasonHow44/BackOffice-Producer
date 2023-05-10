@@ -110,6 +110,7 @@ function ProductsTable(props) {
 				typeOfProduct: item.typeOfProduct,
 				policyPremium: item.policyPremium,
 				sourceOfBusiness: item.sourceOfBusiness,
+				otherActivity: item.otherActivity,
 				adjustments: item.adjustments,
 				dollarBonus: item.dollarBonus,
 				policyHolderType: item.policyHolderType,
@@ -239,6 +240,9 @@ function ProductsTable(props) {
 											</TableCell>
 											<TableCell className="p-2 md:p-2" component="th" scope="row" align="center">
 												{n.sourceOfBusiness}
+											</TableCell>
+											<TableCell className="p-2 md:p-2" component="th" scope="row" align="center">
+												{n.otherActivity}
 											</TableCell>
 											<TableCell className="p-2 md:p-2" component="th" scope="row" align="center">
 												{n.policyType[0] === 'Entries' ? 'AutoEntries' : n.policyType}
