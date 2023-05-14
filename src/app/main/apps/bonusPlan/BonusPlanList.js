@@ -55,7 +55,12 @@ function ContactsList(props) {
 		monthlyAgencyLapseFireBonus: [],
 		monthlyAutoNetGrowthBonus: [],
 		monthlyFireNetGrowthBonus: [],
-		otherActivityBonus: []
+		otherActivityBonus: [],
+		showAutoTargetAmount: false,
+		showFireTargetAmount: false,
+		showLifeTargetAmount: false,
+		showHealthTargetAmount: false,
+		showBankTargetAmount: false
 	});
 
 	const columns = React.useMemo(
@@ -193,13 +198,13 @@ function ContactsList(props) {
 				sortable: true
 			},
 			{
-				Header: '% of Auto Premium',
-				accessor: 'amount',
+				Header: !state.showAutoTargetAmount ? '% of Auto Premium' : 'Flat $ Amount',
+				accessor: !state.showAutoTargetAmount ? 'amount' : 'dollar',
 				className: 'font-bold',
 				sortable: true
 			}
 		],
-		[dispatch, user.starred]
+		[dispatch, user.starred, state]
 	);
 
 	const individualFireTargetBonusColumns = React.useMemo(
@@ -217,13 +222,13 @@ function ContactsList(props) {
 				sortable: true
 			},
 			{
-				Header: '% of Fire Premium',
-				accessor: 'amount',
+				Header: !state.showFireTargetAmount ? '% of Fire Premium' : 'Flat $ Amount',
+				accessor: !state.showFireTargetAmount ? 'amount' : 'dollar',
 				className: 'font-bold',
 				sortable: true
 			}
 		],
-		[dispatch, user.starred]
+		[dispatch, user.starred, state]
 	);
 
 	const individualLifeTargetBonusColumns = React.useMemo(
@@ -241,13 +246,13 @@ function ContactsList(props) {
 				sortable: true
 			},
 			{
-				Header: '% of Life Premium',
-				accessor: 'amount',
+				Header: !state.showLifeTargetAmount ? '% of Life Premium' : 'Flat $ Amount',
+				accessor: !state.showLifeTargetAmount ? 'amount' : 'dollar',
 				className: 'font-bold',
 				sortable: true
 			}
 		],
-		[dispatch, user.starred]
+		[dispatch, user.starred, state]
 	);
 
 	const individualHealthTargetBonusColumns = React.useMemo(
@@ -265,13 +270,13 @@ function ContactsList(props) {
 				sortable: true
 			},
 			{
-				Header: '% of Health Premium',
-				accessor: 'amount',
+				Header: !state.showHealthTargetAmount ? '% of Health Premium' : 'Flat $ Amount',
+				accessor: !state.showHealthTargetAmount ? 'amount' : 'dollar',
 				className: 'font-bold',
 				sortable: true
 			}
 		],
-		[dispatch, user.starred]
+		[dispatch, user.starred, state]
 	);
 
 	const individualBankTargetBonusColumns = React.useMemo(
@@ -289,13 +294,13 @@ function ContactsList(props) {
 				sortable: true
 			},
 			{
-				Header: '% of Bank Premium',
-				accessor: 'amount',
+				Header: !state.showBankTargetAmount ? '% of Bank Premium' : 'Flat $ Amount',
+				accessor: !state.showBankTargetAmount ? 'amount' : 'dollar',
 				className: 'font-bold',
 				sortable: true
 			}
 		],
-		[dispatch, user.starred]
+		[dispatch, user.starred, state]
 	);
 
 	const teamAutoTargetBonusColumns = React.useMemo(
@@ -672,7 +677,15 @@ function ContactsList(props) {
 					tempJSON = { ...tempJSON, otherActivityBonus: tempData };
 				}
 			});
-			setState({ ...state, ...tempJSON });
+			setState({
+				...state,
+				...tempJSON,
+				showAutoTargetAmount: contacts[0].showAutoTargetAmount,
+				showFireTargetAmount: contacts[0].showFireTargetAmount,
+				showLifeTargetAmount: contacts[0].showLifeTargetAmount,
+				showHealthTargetAmount: contacts[0].showHealthTargetAmount,
+				showBankTargetAmount: contacts[0].showBankTargetAmount
+			});
 		} else {
 			setState({ ...state, ...tempJSON });
 		}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import Table from '@material-ui/core/Table';
 import PropTypes from 'prop-types';
@@ -12,10 +12,31 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import { useGlobalFilter, usePagination, useRowSelect, useSortBy, useTable } from 'react-table';
 import clsx from 'clsx';
 import ContactsTablePaginationActions from './BonusPlanTablePaginationActions';
-import { openNewContactDialog } from './store/bonusPlanSlice';
+import { openNewContactDialog, selectContacts } from './store/bonusPlanSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const EnhancedTable = ({ columns, data, onRowClick, title, id }) => {
+	const contacts = useSelector(selectContacts);
+	const [state, setState] = useState({
+		showAutoTargetAmount: false,
+		showFireTargetAmount: false,
+		showLifeTargetAmount: false,
+		showHealthTargetAmount: false,
+		showBankTargetAmount: false
+	});
+
+	useEffect(() => {
+		if (contacts.length > 0) {
+			setState({
+				showAutoTargetAmount: contacts[0].showAutoTargetAmount,
+				showFireTargetAmount: contacts[0].showFireTargetAmount,
+				showLifeTargetAmount: contacts[0].showLifeTargetAmount,
+				showHealthTargetAmount: contacts[0].showHealthTargetAmount,
+				showBankTargetAmount: contacts[0].showBankTargetAmount
+			});
+		}
+	}, [contacts]);
+
 	const {
 		getTableProps,
 		headerGroups,
@@ -124,12 +145,69 @@ const EnhancedTable = ({ columns, data, onRowClick, title, id }) => {
 												{...cell.getCellProps()}
 												align="center"
 												className={clsx(
-													`p-5 text-xs truncate ${
+													`p-4 text-xs truncate ${
 														index === 2 ? `border-r-0` : `border-r-1 `
 													}`,
 													cell.column.className
-												)}
-											>
+												)}											>												
+												{cell.render('Cell').props.row.original.dollar &&
+													index === 2 &&
+													id === 'monthlyAgencyLapseAutoBonus' &&
+													'$'}
+												{cell.render('Cell').props.row.original.dollar &&
+													index === 2 &&
+													id === 'monthlyAgencyLapseFireBonus' &&
+													'$'}
+												{cell.render('Cell').props.row.original.dollar &&
+													index === 1 &&
+													(id === 'monthlyAutoNetGrowthBonus' ||
+														id === 'monthlyFireNetGrowthBonus' ||
+														id === 'otherActivityBonus') &&
+													'$'}												
+												{cell.render('Cell').props.row.original.amount &&
+													index === 2 &&
+													id === 'individualAutoTargetBonus' &&
+													state.showAutoTargetAmount &&
+													'$'}
+												{cell.render('Cell').props.row.original.amount &&
+													index === 2 &&
+													id === 'individualFireTargetBonus' &&
+													state.showFireTargetAmount &&
+													'$'}
+												{cell.render('Cell').props.row.original.amount &&
+													index === 2 &&
+													id === 'individualLifeTargetBonus' &&
+													state.showLifeTargetAmount &&
+													'$'}
+												{cell.render('Cell').props.row.original.amount &&
+													index === 2 &&
+													id === 'individualHealthTargetBonus' &&
+													state.showHealthTargetAmount &&
+													'$'}
+												{cell.render('Cell').props.row.original.amount &&
+													index === 2 &&
+													id === 'individualBankTargetBonus' &&
+													state.showBankTargetAmount &&
+													'$'}
+												{(cell.render('Cell').props.column.Header==='%' || 
+												 (index===1 && (id==='monthlyAgencyLapseAutoBonus'||
+												 	id==='monthlyAgencyLapseFireBonus'))) &&
+													(cell.render('Cell').props.row.original.percent && Number.parseFloat(cell.render('Cell').props.row.original.percent).toFixed(2))
+													 || ((index===2 && (id==='individualAutoTargetBonus' ||
+													id==='individualFireTargetBonus' ||
+													id==='individualLifeTargetBonus' ||
+													id==='individualHealthTargetBonus' ||
+													id==='individualBankTargetBonus')) &&
+													((state.showAutoTargetAmount&&id==='individualAutoTargetBonus')?Number.parseFloat(cell.render('Cell').props.row.original.dollar).toFixed(2):
+													(state.showFireTargetAmount&&id==='individualFireTargetBonus')?Number.parseFloat(cell.render('Cell').props.row.original.dollar).toFixed(2):
+													(state.showLifeTargetAmount&&id==='individualLifeTargetBonus')?Number.parseFloat(cell.render('Cell').props.row.original.dollar).toFixed(2):
+													(state.showHealthTargetAmount&&id==='individualHealthTargetBonus')?Number.parseFloat(cell.render('Cell').props.row.original.dollar).toFixed(2):
+													(state.showBankTargetAmount&&id==='individualBankTargetBonus')?Number.parseFloat(cell.render('Cell').props.row.original.dollar).toFixed(2):
+													Number.parseFloat(cell.render('Cell').props.row.original.amount).toFixed(2))) 
+													|| cell.render('Cell')
+												}
+											{/* {console.log(cell.render('Cell'))} */}
+												{/* {cell.render('Cell')} */}
 												{cell.render('Cell').props.row.original.amount &&
 													index === 2 &&
 													(id === 'teamAutoTargetBonus' ||
@@ -138,63 +216,39 @@ const EnhancedTable = ({ columns, data, onRowClick, title, id }) => {
 														id === 'teamHealthTargetBonus' ||
 														id === 'teamBankTargetBonus') &&
 													'$'}
-
-												{/* {cell.render('Cell').props.row.original.amount &&
+												{cell.render('Cell').props.row.original.percent &&
 													index === 1 &&
+													id === 'monthlyAgencyLapseAutoBonus' &&
+													'%'}
+												{cell.render('Cell').props.row.original.percent &&
+													index === 1 &&
+													id === 'monthlyAgencyLapseFireBonus' &&
+													'%'}
+
+												{cell.render('Cell').props.row.original.amount &&
+													index === 2 &&
+													id === 'individualAutoTargetBonus' &&
+													!state.showAutoTargetAmount &&
+													'%'}
+												{cell.render('Cell').props.row.original.amount &&
+													index === 2 &&
+													id === 'individualFireTargetBonus' &&
+													!state.showFireTargetAmount &&
+													'%'}
+												{cell.render('Cell').props.row.original.amount &&
+													index === 2 &&
 													id === 'individualLifeTargetBonus' &&
-													'$'}
+													!state.showLifeTargetAmount &&
+													'%'}
 												{cell.render('Cell').props.row.original.amount &&
-													index === 1 &&
+													index === 2 &&
 													id === 'individualHealthTargetBonus' &&
-													'$'}
+													!state.showHealthTargetAmount &&
+													'%'}
 												{cell.render('Cell').props.row.original.amount &&
-													index === 1 &&
+													index === 2 &&
 													id === 'individualBankTargetBonus' &&
-													'$'} */}
-												{/* {cell.render('Cell').props.row.original.amount &&
-													index === 1 &&
-													id === 'teamLifeTargetBonus' &&
-													'$'}
-												{cell.render('Cell').props.row.original.amount &&
-													index === 1 &&
-													id === 'teamHealthTargetBonus' &&
-													'$'}
-												{cell.render('Cell').props.row.original.amount &&
-													index === 1 &&
-													id === 'teamBankTargetBonus' &&
-													'$'} */}
-												{cell.render('Cell').props.row.original.dollar &&
-													index === 2 &&
-													id === 'monthlyAgencyLapseAutoBonus' &&
-													'$'}
-												{cell.render('Cell').props.row.original.dollar &&
-													index === 2 &&
-													id === 'monthlyAgencyLapseFireBonus' &&
-													'$'}
-
-												{cell.render('Cell').props.row.original.dollar &&
-													index === 1 &&
-													(id === 'monthlyAutoNetGrowthBonus' ||
-														id === 'monthlyFireNetGrowthBonus' ||
-														id === 'otherActivityBonus') &&
-													'$'}
-
-												{cell.render('Cell')}
-												{cell.render('Cell').props.row.original.percent &&
-													index === 1 &&
-													id === 'monthlyAgencyLapseAutoBonus' &&
-													'%'}
-												{cell.render('Cell').props.row.original.percent &&
-													index === 1 &&
-													id === 'monthlyAgencyLapseFireBonus' &&
-													'%'}
-												{cell.render('Cell').props.row.original.amount &&
-													index === 2 &&
-													(id === 'individualAutoTargetBonus' ||
-														id === 'individualFireTargetBonus' ||
-														id === 'individualLifeTargetBonus' ||
-														id === 'individualHealthTargetBonus' ||
-														id === 'individualBankTargetBonus') &&
+													!state.showBankTargetAmount &&
 													'%'}
 											</TableCell>
 										);
