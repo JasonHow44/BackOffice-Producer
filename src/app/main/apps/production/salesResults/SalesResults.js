@@ -45,7 +45,7 @@ function SalesResults(props) {
 	const [bonus, setBonus] = useState('Include Initial Bonus in Calculation');
 	const [year, setYear] = useState(moment().format('yyyy')); 
 	const [period, setPeriod] = useState(moment().format('MMMM'));
-	const [title, setTitle] = useState('Production Result');
+	const [title, setTitle] = useState('Production Summary');
 	
 	useEffect(() => {
 		dispatch(getUsers());

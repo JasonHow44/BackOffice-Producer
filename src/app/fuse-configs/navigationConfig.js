@@ -124,7 +124,7 @@ const navigationConfig = [
 				children: [
 					{
 						id: 'sales-results',
-						title: 'Production Results',
+						title: 'Production Summary',
 						type: 'item',
 						url: '/apps/production/sales-results',
 						exact: true
@@ -138,7 +138,7 @@ const navigationConfig = [
 					},
 					{
 						id: 'multiline',
-						title: 'Penetration Report',
+						title: 'Production Report',
 						type: 'item',
 						url: '/apps/production/multiline',
 						exact: true
