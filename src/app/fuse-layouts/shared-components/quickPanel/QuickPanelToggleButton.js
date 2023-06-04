@@ -19,7 +19,7 @@ function QuickPanelToggleButton(props) {
 			'/apps/enter-sales/auto-entry': 'RCOIOlr1nr0',
 			'/apps/income/payroll': '5yobtk9u4Kg',
 			'/apps/income/possible-money': 'v-T-JM5SpFE',
-			'/apps/production/sales-results': 'JNJxusgMcS8',
+			'/apps/production/sales-results': 'k_cvTn64KQE',
 			'/apps/production/product-line': 'APRKF7L-yus',
 			'/apps/production/multiline': '3LbOLu3f2-Q',
 			'/apps/activity/appRegister': 'zVhEjT44clI'
