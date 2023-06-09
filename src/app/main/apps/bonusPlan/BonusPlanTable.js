@@ -189,6 +189,14 @@ const EnhancedTable = ({ columns, data, onRowClick, title, id }) => {
 													id === 'individualBankTargetBonus' &&
 													state.showBankTargetAmount &&
 													'$'}
+												{cell.render('Cell').props.row.original.amount &&
+													index === 2 &&
+													(id === 'teamAutoTargetBonus' ||
+														id === 'teamFireTargetBonus' ||
+														id === 'teamLifeTargetBonus' ||
+														id === 'teamHealthTargetBonus' ||
+														id === 'teamBankTargetBonus') &&
+													'$'}
 												{(cell.render('Cell').props.column.Header==='%' || 
 												 (index===1 && (id==='monthlyAgencyLapseAutoBonus'||
 												 	id==='monthlyAgencyLapseFireBonus'))) &&
@@ -208,14 +216,6 @@ const EnhancedTable = ({ columns, data, onRowClick, title, id }) => {
 												}
 											{/* {console.log(cell.render('Cell'))} */}
 												{/* {cell.render('Cell')} */}
-												{cell.render('Cell').props.row.original.amount &&
-													index === 2 &&
-													(id === 'teamAutoTargetBonus' ||
-														id === 'teamFireTargetBonus' ||
-														id === 'teamLifeTargetBonus' ||
-														id === 'teamHealthTargetBonus' ||
-														id === 'teamBankTargetBonus') &&
-													'$'}
 												{cell.render('Cell').props.row.original.percent &&
 													index === 1 &&
 													id === 'monthlyAgencyLapseAutoBonus' &&
