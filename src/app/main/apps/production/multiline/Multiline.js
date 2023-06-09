@@ -482,15 +482,15 @@ function Multiline(props) {
 						</div>					
 					</FuseAnimateGroup>	
 					<FuseAnimateGroup className="flex flex-wrap" enter={{ animation: 'transition.slideUpBigIn' }}>
-						<div className="widget flex w-1/4 p-12">
+						<div className="widget flex w-1/3 p-12">
 							<PieChart widget={data.widgets.Production_Multiline_Product_PieChart} />
 						</div>	
-						<div className="widget flex w-2/4 p-12">
+						<div className="widget flex w-2/3 p-12">
 							<Table data={data.widgets.Production_Multiline_Bonuses_Table} />
 						</div>	
-						<div className="widget flex w-1/4 p-12">
+						{/* <div className="widget flex w-1/4 p-12">
 							<PieChart widget={data.widgets.Production_Multiline_Bonus_PieChart} />
-						</div>					
+						</div>					 */}
 					</FuseAnimateGroup>					
 				</div>				
 			}
