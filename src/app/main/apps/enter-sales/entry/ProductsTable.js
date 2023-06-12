@@ -254,7 +254,7 @@ function ProductsTable(props) {
 												scope="row"
 												align="center"
 											>
-												{n.dollarBonus ? `$${n.dollarBonus}` : ''}
+												{n.dollarBonus ? `$${n.dollarBonus.toFixed(2)}` : ''}
 											</TableCell>
 										</TableRow>
 									);
