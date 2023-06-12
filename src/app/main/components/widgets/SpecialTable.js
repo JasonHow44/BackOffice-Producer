@@ -52,7 +52,7 @@ function Widget10(props) {
 											return (
 												<TableCell key={cell.id} component="th" scope="row" align="center">
 													<Typography className={cell.classes}>
-														{(row.id === 2 || row.id === 3 || row.id === 5) && cell.value !== 0
+														{(row.cells[0].value.indexOf('Preminum') >= 0 || row.cells[0].value.indexOf('Premium') >= 0 || row.cells[0].value.indexOf('Amount') >= 0 || row.cells[0].value.indexOf('Bonus') >= 0) && cell.value
                               ? props.noDolarSign?formattedString(cell.value):`$ ${formattedString(cell.value)}`
                               : formattedString(cell.value)}
 													</Typography>
