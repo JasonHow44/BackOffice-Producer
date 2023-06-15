@@ -828,8 +828,8 @@ const productioAppDB = {
 				headers: [
 					{id:'Sales Goal', value:'Sales Goal', type:false, color:''},
 					{id:'Actual Sales', value:'Actual Sales', type:false, color:''},
-					{id:'Total Premium / Dollars', value:'Total Premium / Dollars', type:true, color:''},
-					{id:'Average Premium / Dollars', value:'Average Premium / Dollars', type:false, color:''},
+					{id:'Total Premium / Dollars', value:'Total Premium / Dollars', type:true, color:'', startAdornment: '$'},
+					{id:'Average Premium / Dollars', value:'Average Premium / Dollars', type:false, color:'', startAdornment: '$'},
 				],
 				rows: [
 					{ id: "Auto", value: "Auto", color: "" },
@@ -871,8 +871,8 @@ const productioAppDB = {
 				headers: [
 					{id:'Sales Goal', value:'Sales Goal', type:false, color:''},
 					{id:'Actual Sales', value:'Actual Sales', type:false, color:''},
-					{id:'Total Premium / Dollars', value:'Total Premium / Dollars', type:true, color:''},
-					{id:'Average Premium / Dollars', value:'Average Premium / Dollars', type:false, color:''},
+					{id:'Total Premium / Dollars', value:'Total Premium / Dollars', type:true, color:'', startAdornment: '$'},
+					{id:'Average Premium / Dollars', value:'Average Premium / Dollars', type:false, color:'', startAdornment: '$'},
 				],
 				rows: [
 					{ id: "Auto", value: "Auto", color: "" },
