@@ -251,7 +251,7 @@ export const incomeGoalsColumns = [
 export const incomeBonusesColumns = [
 	{
 		id: 'avatar',
-		title: 'BONUSES',
+		title: 'Compensation',
 		color: '',
 		align: 'center',
 		rowSpan: 2
@@ -270,7 +270,7 @@ export const incomeBonusesColumns = [
 	},
 	{
 		id: 'total',
-		title: 'Total Bonus Goal',
+		title: 'Total Compensation Goal',
 		color: '',
 		rowSpan: 2,
 		colSpan: 1
@@ -296,7 +296,7 @@ export const policiesAndCommissions = [
 	{ id: 'Lapse Rate % Bonus', value: 'Lapse Rate % Commission' },
 	{ id: 'Special Promotion	', value: 'Special Promotion' },
 	{ id: 'Total Policies', value: 'Total Policies' },
-	{ id: 'Total Bonuses', value: 'Total Commissions' },
+	{ id: 'Total Bonuses', value: 'Total Compensation' },
 	{ id: 'Bonus Verified?', value: 'Bonus Verified?' }
 ];
 
@@ -336,11 +336,11 @@ export const incomeGoalsHeaders = [
 ];
 
 export const incomeBonusesHeaders = [
-	{ id: 'autoPolicyBonuses', value: 'Auto Policy Bonuses', type: false, color: '', startAdornment: '$' },
-	{ id: 'firePolicyBonuses', value: 'Fire Policy Bonuses', type: false, color: '', startAdornment: '$' },
-	{ id: 'lifePolicyBonuses', value: 'Life Policy Bonuses', type: false, color: '', startAdornment: '$' },
-	{ id: 'healthPolicyBonuses', value: 'Health Policy Bonuses', type: false, color: '', startAdornment: '$' },
-	{ id: 'bankProductBonuses', value: 'Bank Product Bonuses', type: false, color: '', startAdornment: '$' },
+	{ id: 'autoPolicyBonuses', value: 'Auto Policy Commissions', type: false, color: '', startAdornment: '$' },
+	{ id: 'firePolicyBonuses', value: 'Fire Policy Commissions', type: false, color: '', startAdornment: '$' },
+	{ id: 'lifePolicyBonuses', value: 'Life Policy Commissions', type: false, color: '', startAdornment: '$' },
+	{ id: 'healthPolicyBonuses', value: 'Health Policy Commissions', type: false, color: '', startAdornment: '$' },
+	{ id: 'bankProductBonuses', value: 'Bank Product Commissions', type: false, color: '', startAdornment: '$' },
 	{
 		id: 'individualAutoTargetBonuses',
 		value: 'Individual Auto Target Bonuses',
@@ -379,7 +379,7 @@ export const incomeBonusesHeaders = [
 ];
 
 export const incomeAvgsRows = [
-	{ id: 'Average Bonus', value: 'Average Bonus', type: false, color: '' },
+	{ id: 'Average Commission', value: 'Average Commission', type: false, color: '' },
 	{ id: 'Average Annual Premium', value: 'Average Annual Premium', type: false, color: '' }
 ];
 
@@ -407,7 +407,7 @@ export const toUntrimed = {
 	ifrCompleted: 'IFR Completed',
 
 	// avgs rows
-	averageBonus: 'Average Bonus',
+	averageBonus: 'Average Commission',
 	averageAnnualPremium: 'Average Annual Premium',
 
 	// bonuses rows

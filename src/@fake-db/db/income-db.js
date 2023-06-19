@@ -100,7 +100,7 @@ const projectDashboardAppDB = {
 					{ id: 17, value: 'Lapse Rate % Commission', type: false },
 					{ id: 18, value: 'Special Promotion', type: false },
 					{ id: 19, value: 'Total Policies', type: true },
-					{ id: 20, value: 'Total Commissions', type: false },
+					{ id: 20, value: 'Total Compensation', type: false },
 					{ id: 21, value: 'Bonus Verified?', type: true }
 				],				
 				rows: [	
