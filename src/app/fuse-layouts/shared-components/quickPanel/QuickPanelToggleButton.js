@@ -21,7 +21,7 @@ function QuickPanelToggleButton(props) {
 			'/apps/income/possible-money': 'v-T-JM5SpFE',
 			'/apps/production/sales-results': 'k_cvTn64KQE',
 			'/apps/production/product-line': 'APRKF7L-yus',
-			'/apps/production/multiline': '3LbOLu3f2-Q',
+			'/apps/production/multiline': 'ReDyccAKAb0',
 			'/apps/activity/appRegister': 'zVhEjT44clI'
 		}
 		setVideoId(videoMap[pathname])
