@@ -213,15 +213,14 @@ function IncomeGoals(props) {
 				}); 					
 
 				// bonuses
-				Object.keys(visionData['Bonuses']).map((key) => {
-					if(key!=="id") {
-						const total = Object.keys(visionData['Bonuses'][key]).reduce((sum, valKey) => {
-							bonusesTableContent[key][toUntrimed[valKey]] = parseFloat(visionData['Bonuses'][key][valKey]||0);
-							return sum + bonusesTableContent[key][toUntrimed[valKey]]
-						}, 0);
-						if (bonusesTableHeader.find(item => item.value === 'Total Bonus Goal')) {
-							bonusesTableContent[key]['Total Bonus Goal'] = total
-						}
+				months1.map(month => {
+					bonusesTableContent[month] = {};
+					const total = bonusesTableHeader.reduce((sum, header) => {
+						bonusesTableContent[month][header.value] = visionData.Bonuses[month][header.id];
+						return sum += visionData.Bonuses[month][header.id] || 0
+					}, 0);
+					if (bonusesTableHeader.find(item => item.value === 'Total Bonus Goal')) {
+						bonusesTableContent[month]['Total Bonus Goal'] = total
 					}
 				});
 			}

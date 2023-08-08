@@ -331,16 +331,16 @@ export const incomeGoalsHeaders = [
 	{ id: 'annualFirePremium', value: 'Annual Fire Premium', type: false, color: '', startAdornment: '$' },
 	{ id: 'annualLifePremium', value: 'Annual Life Premium', type: false, color: '', startAdornment: '$' },
 	{ id: 'annualHealthPremium', value: 'Annual Health Premium', type: false, color: '', startAdornment: '$' },
-	{ id: 'agencyBankComm', value: 'Agency Bank Comm', type: false, color: '', startAdornment: '$' },
+	{ id: 'annualBankPremium', value: 'Annual Bank Premium', type: false, color: '', startAdornment: '$' },
 	{ id: 'totalAnnualPremium', value: 'Total Annual Premium', type: false, color: '', startAdornment: '$' }
 ];
 
 export const incomeBonusesHeaders = [
-	{ id: 'autoPolicyBonuses', value: 'Auto Policy Commissions', type: false, color: '', startAdornment: '$' },
-	{ id: 'firePolicyBonuses', value: 'Fire Policy Commissions', type: false, color: '', startAdornment: '$' },
-	{ id: 'lifePolicyBonuses', value: 'Life Policy Commissions', type: false, color: '', startAdornment: '$' },
-	{ id: 'healthPolicyBonuses', value: 'Health Policy Commissions', type: false, color: '', startAdornment: '$' },
-	{ id: 'bankProductBonuses', value: 'Bank Product Commissions', type: false, color: '', startAdornment: '$' },
+	{ id: 'autoPolicyBonuses', value: 'Auto Policy Commission', type: false, color: '', startAdornment: '$' },
+	{ id: 'firePolicyBonuses', value: 'Fire Policy Commission', type: false, color: '', startAdornment: '$' },
+	{ id: 'lifePolicyBonuses', value: 'Life Policy Commission', type: false, color: '', startAdornment: '$' },
+	{ id: 'healthPolicyBonuses', value: 'Health Policy Commission', type: false, color: '', startAdornment: '$' },
+	{ id: 'bankProductBonuses', value: 'Bank Product Commission', type: false, color: '', startAdornment: '$' },
 	{
 		id: 'individualAutoTargetBonuses',
 		value: 'Individual Auto Target Bonuses',
@@ -395,7 +395,7 @@ export const toUntrimed = {
 	annualFirePremium: 'Annual Fire Premium',
 	annualLifePremium: 'Annual Life Premium',
 	annualHealthPremium: 'Annual Health Premium',
-	agencyBankComm: 'Agency Bank Comm',
+	annualBankPremium: 'Annual Bank Premium',
 	totalAnnualPremium: 'Total Annual Premium',
 	multilineReviewApptKept: 'Multiline Review Appt. Kept',
 	ifr: 'IFR',
