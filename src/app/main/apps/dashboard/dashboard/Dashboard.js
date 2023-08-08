@@ -228,12 +228,13 @@ function Dashboard(props) {
 					if (policy.value === 'Auto' || policy.value === 'Fire') {
 						let tempCardData = [];
 						const cardData = widgets[`Dashboard_LapseRate_${policy.value}_Panel`].cardData;
-						tempCardData = cardData.map((item, index) => ({
-							...item,
-							count: `${
-								main[production][[period,preMonth][index]][UID][policy.value][['lapseRateChange', 'lapseRate'][index]]
-							}`
-						}));
+						tempCardData = cardData.map((item, index) => {
+							const count = main[production][[period,preMonth][index]][UID][policy.value][['lapseRateChange', 'lapseRate'][index]]
+							return {
+								...item,
+								count: Number.isNaN(count) ? '--' : count
+							}
+						});
 						widgets = {
 							...widgets,
 							[`Dashboard_LapseRate_${policy.value}_Panel`]: {
