@@ -47,7 +47,7 @@ export const registerWithFirebase = model => async dispatch => {
 					});
 
 					realDb.ref(`BonusPlan/${belongTo}/${response.user.uid}/`).set({
-						name: "Team Bonus Plan Template",
+						name: "Service",
 						teamBonus: true
 					})
 					var inviteUserRef = realDb.ref(`Invitation/${belongTo}/${email.replace('.','').replace('.','').replace('.','')}`)
