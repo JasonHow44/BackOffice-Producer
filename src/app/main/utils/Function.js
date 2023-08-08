@@ -68,6 +68,9 @@ export const formattedNumber = val => {
 	if (IsNumeric(val) && isNaN(val)) {
 		return 0;
 	}
+	if (isNaN(ceil(val))) {
+		return val
+	}
 	return ceil(val);
 };
 
