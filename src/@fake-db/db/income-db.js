@@ -83,24 +83,24 @@ const projectDashboardAppDB = {
 				],
 				headers: [
 					{ id: 2, value: 'Auto Policies', type: true },
-					{ id: 3, value: 'Auto Commissions', type: false },
+					{ id: 3, value: 'Auto Commissions', type: false, startAdornment: "$" },
 					{ id: 4, value: 'Fire Policies', type: true },
-					{ id: 5, value: 'Fire Commissions', type: false },
+					{ id: 5, value: 'Fire Commissions', type: false, startAdornment: "$" },
 					{ id: 6, value: 'Life Policies', type: true },
-					{ id: 7, value: 'Life Commissions', type: false },
+					{ id: 7, value: 'Life Commissions', type: false, startAdornment: "$" },
 					{ id: 8, value: 'Health Policies', type: true },
-					{ id: 9, value: 'Health Commissions', type: false },
+					{ id: 9, value: 'Health Commissions', type: false, startAdornment: "$" },
 					{ id: 10, value: 'Bank Products', type: true },
-					{ id: 11, value: 'Bank Commissions', type: false },
+					{ id: 11, value: 'Bank Commissions', type: false, startAdornment: "$" },
 					{ id: 12, value: 'Other Activities', type: true },
-					{ id: 13, value: 'Other Activity Bonuses', type: false },
-					{ id: 14, value: 'Individual Target Commissions', type: false },
-					{ id: 15, value: 'Team Target Commissions', type: false },
-					{ id: 16, value: 'Policy Growth Commissions', type: false },
-					{ id: 17, value: 'Lapse Rate % Commission', type: false },
+					{ id: 13, value: 'Other Activity Bonuses', type: false, startAdornment: "$" },
+					{ id: 14, value: 'Individual Target Commissions', type: false, startAdornment: "$" },
+					{ id: 15, value: 'Team Target Commissions', type: false, startAdornment: "$" },
+					{ id: 16, value: 'Policy Growth Commissions', type: false, startAdornment: "$" },
+					{ id: 17, value: 'Lapse Rate % Commission', type: false, endAdornment: "%" },
 					{ id: 18, value: 'Special Promotion', type: false },
 					{ id: 19, value: 'Total Policies', type: true },
-					{ id: 20, value: 'Total Compensation', type: false },
+					{ id: 20, value: 'Total Compensation', type: false, startAdornment: "$" },
 					{ id: 21, value: 'Bonus Verified?', type: true }
 				],				
 				rows: [	
@@ -5046,7 +5046,8 @@ const projectDashboardAppDB = {
 					},
 					{
 						id: 'total',
-						title: 'TOTAL'
+						title: 'TOTAL',
+						startAdornment: '$'
 					}
 				],
 				rows: [

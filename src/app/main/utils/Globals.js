@@ -182,9 +182,9 @@ export const bonusPlanDbNames = {
 };
 
 export const policiesAndPremium1 = [
-	{ id: 'Average Premium', value: 'Average Premium' },
+	{ id: 'Average Premium', value: 'Average Premium', startAdornment: '$' },
 	{ id: 'Number of Policies', value: 'Number of Policies' },
-	{ id: 'Policy Premium', value: 'Policy Premium' }
+	{ id: 'Policy Premium', value: 'Policy Premium', startAdornment: '$' }
 ];
 
 export const policiesAndPremium2 = [

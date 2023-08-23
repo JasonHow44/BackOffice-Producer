@@ -282,13 +282,13 @@ function IncomePayroll(props) {
 					}];
 					let levelReachedCells = [{
 						id: 'left_title',
-						value: 'Avg Premium',
+						value: 'Level Reached',
 						classes: 'bg-red text-white',
 						icon: ''
 					}];
 					let flatSAmountCells = [{
 						id: 'left_title',
-						value: 'Level Reached',
+						value: 'Avg Premium',
 						classes: 'bg-pink text-white',
 						icon: ''
 					}];

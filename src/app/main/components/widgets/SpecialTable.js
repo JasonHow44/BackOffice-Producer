@@ -44,7 +44,7 @@ function Widget10(props) {
 										case 'total':{
 											return(
 												<TableCell key={cell.id} rowSpan={5} className='border-l-1' align="center">
-													{formattedString(cell.value)}
+													{formattedString(cell.value, '$')}
 												</TableCell>
 											)
 										}

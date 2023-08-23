@@ -290,7 +290,8 @@ function Widget(props) {
 													>
 														{columns.length === 0 &&
 															headers.length > 0 &&
-															formattedString(row[colKey])}
+															formattedString(row[colKey]) &&
+															formattedString(row[colKey], headers[colNum + 1].startAdornment || rows[rowNum].startAdornment, rows[rowNum].endAdornment)}
 													</TableCell>
 												)
 										)}

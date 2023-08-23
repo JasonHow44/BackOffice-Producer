@@ -93,7 +93,8 @@ function ProductLine(props) {
 				headers.push({
 					id: 'bonus',
 					value: 'Bonus',
-					color: ''
+					color: '',
+					startAdornment: '$'
 				});
 
 				monthsAndQuarters.map((month, row) => {
