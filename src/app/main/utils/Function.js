@@ -39,8 +39,11 @@ export const formattedString = (val, startAdornment = '', endAdornment = '') => 
 	if (IsNumeric(val)) {
 		return val === 0
 			? ''
-			: startAdornment === '$'
-			? `${startAdornment}${ceil(val).toFixed(2)}${endAdornment}`
+			: startAdornment == '$'
+			? `${new Intl.NumberFormat("en-US", {
+				style: "currency",
+				currency: "USD",
+			}).format(val)}${endAdornment}`
 			: `${startAdornment}${ceil(val)}${endAdornment}`;
 	}
 	if (IsNumeric(val) && isNaN(val)) {
