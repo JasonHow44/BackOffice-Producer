@@ -143,7 +143,6 @@ function IncomeGoals(props) {
 				color: '',
 				colSpan: Object.keys(otherActivityBonus).length
 			});
-			console.log(bonusesTableColumns);
 
 			Object.keys(otherActivityBonus).map(key => {
 				const item = otherActivityBonus[key];
@@ -216,8 +215,11 @@ function IncomeGoals(props) {
 				months1.map(month => {
 					bonusesTableContent[month] = {};
 					const total = bonusesTableHeader.reduce((sum, header) => {
-						bonusesTableContent[month][header.value] = visionData.Bonuses[month][header.id];
-						return sum += visionData.Bonuses[month][header.id] || 0
+						if (header.value !== 'Total Bonus Goal') {
+							bonusesTableContent[month][header.value] = visionData.Bonuses[month][header.id];
+							return sum += visionData.Bonuses[month][header.id] || 0
+						}
+						return sum
 					}, 0);
 					if (bonusesTableHeader.find(item => item.value === 'Total Bonus Goal')) {
 						bonusesTableContent[month]['Total Bonus Goal'] = total
