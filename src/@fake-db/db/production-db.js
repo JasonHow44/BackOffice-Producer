@@ -1,3 +1,4 @@
+import { colors } from 'app/main/utils/Globals';
 import mock from '../mock';
 import { db, realDb } from './firebase';
 
@@ -203,7 +204,11 @@ const productioAppDB = {
 							hoverBackgroundColor: '#d1eefc',
 							categoryPercentage: 1
 						},						
-					]
+					].map((item, i) => ({
+            ...item,
+            backgroundColor: colors[i].backgroundColor,
+            hoverBackgroundColor: colors[i].hoverBackgroundColor,
+          }))
 				},
 				options: {
 					responsive: true,
@@ -303,7 +308,11 @@ const productioAppDB = {
 							hoverBackgroundColor: '#d1eefc',
 							categoryPercentage: 1
 						},						
-					]
+					].map((item, i) => ({
+            ...item,
+            backgroundColor: colors[i].backgroundColor,
+            hoverBackgroundColor: colors[i].hoverBackgroundColor,
+          }))
 				},
 				options: {
 					responsive: true,

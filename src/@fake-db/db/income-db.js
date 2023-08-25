@@ -1,3 +1,4 @@
+import { colors } from 'app/main/utils/Globals';
 import mock from '../mock';
 
 const projectDashboardAppDB = {
@@ -6061,7 +6062,11 @@ const projectDashboardAppDB = {
 							hoverBackgroundColor: '#ffcece',
 							categoryPercentage: 1
 						},													
-					]
+					].map((item, i) => ({
+            ...item,
+            backgroundColor: colors[i].backgroundColor,
+            hoverBackgroundColor: colors[i].hoverBackgroundColor,
+          }))
 				},
 				options: {
 					responsive: true,
