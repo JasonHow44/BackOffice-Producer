@@ -587,7 +587,7 @@ function PossibleMoney(props) {
 								value={period}
 								onChange={ev => handleChangePeriod(ev)}
 								label="Report Period"
-								data={options.period.data}
+								data={options.period.data.filter(option => !option.item.includes("Quarter") && !option.item.includes("Year"))}
 							/>
 						</FuseAnimate>
 					</div>
