@@ -5138,7 +5138,8 @@ const projectDashboardAppDB = {
 								classes: '',
 								icon: ''
 							}
-						]
+						],
+						startAdornment: '$'
 					},
 					{
 						id: 3,
@@ -5179,7 +5180,8 @@ const projectDashboardAppDB = {
 								classes: '',
 								icon: ''
 							}
-						]
+						],
+						startAdornment: '$'
 					},
 					{
 						id: 4,
@@ -5261,7 +5263,8 @@ const projectDashboardAppDB = {
 								classes: '',
 								icon: ''
 							}
-						]
+						],
+						startAdornment: '$'
 					}
 				]
 			}
@@ -5387,7 +5390,8 @@ const projectDashboardAppDB = {
 								classes: '',
 								icon: ''
 							}
-						]
+						],
+						startAdornment: '$'
 					},
 					{
 						id: 3,
@@ -5428,7 +5432,8 @@ const projectDashboardAppDB = {
 								classes: '',
 								icon: ''
 							}
-						]
+						],
+						startAdornment: '$'
 					},
 					{
 						id: 4,
@@ -5510,7 +5515,8 @@ const projectDashboardAppDB = {
 								classes: '',
 								icon: ''
 							}
-						]
+						],
+						startAdornment: '$'
 					}
 				]
 			}
@@ -5636,7 +5642,8 @@ const projectDashboardAppDB = {
 								classes: '',
 								icon: ''
 							}
-						]
+						],
+						startAdornment: '$'
 					},
 					{
 						id: 3,
@@ -5677,7 +5684,8 @@ const projectDashboardAppDB = {
 								classes: '',
 								icon: ''
 							}
-						]
+						],
+						startAdornment: '$'
 					},
 					{
 						id: 4,
@@ -5759,7 +5767,8 @@ const projectDashboardAppDB = {
 								classes: '',
 								icon: ''
 							}
-						]
+						],
+						startAdornment: '$'
 					}
 				]
 			}

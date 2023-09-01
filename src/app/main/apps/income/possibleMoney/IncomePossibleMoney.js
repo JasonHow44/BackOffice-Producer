@@ -168,24 +168,30 @@ function PossibleMoney(props) {
 					classes: '',
 					icon: ''
 				});
+				const currentLevelRows = widgets.Income_PossibleMoney_Current_Level_Table.table.rows;
 
 				tempRows.push({
+					...currentLevelRows.find(row => row.id === 1),
 					id: 1,
 					cells: policiesCells
 				});
 				tempRows.push({
+					...currentLevelRows.find(row => row.id === 2),
 					id: 2,
 					cells: annualPremiumCells
 				});
 				tempRows.push({
+					...currentLevelRows.find(row => row.id === 3),
 					id: 3,
 					cells: avgPremiumCells
 				});
 				tempRows.push({
+					...currentLevelRows.find(row => row.id === 4),
 					id: 4,
 					cells: levelReachedCells
 				});
 				tempRows.push({
+					...currentLevelRows.find(row => row.id === 5),
 					id: 5,
 					cells: targetBonusEarned
 				});					
@@ -300,20 +306,24 @@ function PossibleMoney(props) {
 					classes: '',
 					icon: ''
 				});
-
+				const nextLevelRows = widgets.Income_PossibleMoney_Next_Level_Table.table.rows;
 				tempRows.push({
+					...nextLevelRows.find(row => row.id === 1),
 					id: 1,
 					cells: policiesCells
 				});
 				tempRows.push({
+					...nextLevelRows.find(row => row.id === 2),
 					id: 2,
 					cells: annualPremiumCells
 				});			
 				tempRows.push({
+					...nextLevelRows.find(row => row.id === 4),
 					id: 4,
 					cells: levelReachedCells
 				});
 				tempRows.push({
+					...nextLevelRows.find(row => row.id === 5),
 					id: 5,
 					cells: targetBonusEarned
 				});					
@@ -427,20 +437,24 @@ function PossibleMoney(props) {
 					classes: '',
 					icon: ''
 				});
-
+				const maxLevelRows = widgets.Income_PossibleMoney_Max_Level_Table.table.rows;
 				tempRows.push({
+					...maxLevelRows.find(row => row.id === 1),
 					id: 1,
 					cells: policiesCells
 				});
 				tempRows.push({
+					...maxLevelRows.find(row => row.id === 2),
 					id: 2,
 					cells: annualPremiumCells
 				});			
 				tempRows.push({
+					...maxLevelRows.find(row => row.id === 4),
 					id: 4,
 					cells: levelReachedCells
 				});
 				tempRows.push({
+					...maxLevelRows.find(row => row.id === 5),
 					id: 5,
 					cells: targetBonusEarned
 				});					
