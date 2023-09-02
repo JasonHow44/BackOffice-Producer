@@ -538,6 +538,20 @@ function PossibleMoney(props) {
 								...widgets.Income_PossibleMoney_Chart.mainChart.TW, datasets: [
 									...tempDatasets
 								] 
+							},
+							options: {
+								tooltips: {
+									callbacks: {
+										label: function(item, data) {
+											const datasetLabel = data.datasets[item.datasetIndex].label || '';
+											const label = new Intl.NumberFormat("en-US", {
+												style: "currency",
+												currency: "USD",
+											}).format(item.yLabel)
+											return datasetLabel + ': ' + label;
+										}
+									}
+								},
 							}
 						}
 					}
