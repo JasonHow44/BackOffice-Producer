@@ -1133,15 +1133,13 @@ function Products() {
 											size={150}
 										/>
 
-										
-										<SelectBox
+										<TextInput
 											id="outlined-basic"
 											label="Policy Information"
-											data={firePolicyTypeList}
 											variant="outlined"
 											value={state.policyInformationFire}
 											validation="policyInformationFire"
-											handleChangeValue={handleChangeValue}
+											onChange={handleChangeValue}
 											willvalidation={false}
 											validate={false}
 											size={350}
