@@ -15,94 +15,27 @@ const projectDashboardAppDB = {
 						color: '',
 						align: 'center',
 						rowSpan: 2
-					},
-					{
-						id: 'auto',
-						title: 'AUTO',
-						colSpan: 2
-					},
-					{
-						id: 'fire',
-						title: 'FIRE',
-						colSpan: 2
-					},
-					{
-						id: 'life',
-						title: 'LIFE',
-						colSpan: 2
-					},
-					{
-						id: 'health',
-						title: 'HEALTH',
-						colSpan: 2
-					},
-					{
-						id: 'bank',
-						title: 'BANK',
-						colSpan: 2
-					},
-					{
-						id: 'other',
-						title: 'OTHER',
-						colSpan: 2
-					},
-					{
-						id: 'ind',
-						title: 'IND',
-						colSpan: 1
-					},
-					{
-						id: 'team',
-						title: 'TEAM',
-						colSpan: 1
-					},
-					{
-						id: 'grow',
-						title: 'GROW',
-						colSpan: 1
-					},
-					{
-						id: 'lapse',
-						title: 'LAPSE',
-						colSpan: 1
-					},
-					{
-						id: 'special',
-						title: 'SPECIAL',
-						colSpan: 1
-					},
-					{
-						id: 'totals',
-						title: 'TOTALS',
-						colSpan: 2
-					},
-					{
-						id: 'verified',
-						title: 'VERIFIED',
-						colSpan: 1
 					}
 				],
 				headers: [
 					{ id: 2, value: 'Auto Policies', type: true },
-					{ id: 3, value: 'Auto Commissions', type: false, startAdornment: "$" },
+					{ id: 3, value: 'Auto Commission', type: false, startAdornment: "$" },
 					{ id: 4, value: 'Fire Policies', type: true },
-					{ id: 5, value: 'Fire Commissions', type: false, startAdornment: "$" },
+					{ id: 5, value: 'Fire Commission', type: false, startAdornment: "$" },
 					{ id: 6, value: 'Life Policies', type: true },
-					{ id: 7, value: 'Life Commissions', type: false, startAdornment: "$" },
+					{ id: 7, value: 'Life Commission', type: false, startAdornment: "$" },
 					{ id: 8, value: 'Health Policies', type: true },
-					{ id: 9, value: 'Health Commissions', type: false, startAdornment: "$" },
-					{ id: 10, value: 'Bank Products', type: true },
-					{ id: 11, value: 'Bank Commissions', type: false, startAdornment: "$" },
+					{ id: 9, value: 'Health Commission', type: false, startAdornment: "$" },
+					{ id: 10, value: 'Bank Policies', type: true },
+					{ id: 11, value: 'Bank Commission', type: false, startAdornment: "$" },
 					{ id: 12, value: 'Other Activities', type: true },
 					{ id: 13, value: 'Other Activity Bonuses', type: false, startAdornment: "$" },
-					{ id: 14, value: 'Individual Target Commissions', type: false, startAdornment: "$" },
-					{ id: 15, value: 'Team Target Commissions', type: false, startAdornment: "$" },
-					{ id: 16, value: 'Policy Growth Commissions', type: false, startAdornment: "$" },
-					{ id: 17, value: 'Lapse Rate % Commission', type: false, endAdornment: "%" },
-					{ id: 18, value: 'Special Promotion', type: false },
+					{ id: 14, value: 'Individual Target Bonuses', type: false, startAdornment: "$" },
+					{ id: 15, value: 'Team Target Bonuses', type: false, startAdornment: "$" },
+					{ id: 16, value: 'Policy Growth Bonuses', type: false, startAdornment: "$" },
+					{ id: 17, value: 'Lapse Rate % Bonus', type: false, endAdornment: "%" },
 					{ id: 19, value: 'Total Policies', type: true },
-					{ id: 20, value: 'Total Compensation', type: false, startAdornment: "$" },
-					{ id: 21, value: 'Bonus Verified?', type: true }
+					{ id: 20, value: 'Total Compensation', type: false, startAdornment: "$" }
 				],				
 				rows: [	
 					{ id: "January", value: "January", color: "" },

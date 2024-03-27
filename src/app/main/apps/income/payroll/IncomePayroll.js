@@ -83,7 +83,7 @@ function IncomePayroll(props) {
 							} 
 							console.log(tempItem);
 							
-							value = main[production][month.value][UID][colName[0]][tempItem==='Commissions'? "Bonuses": tempItem];
+							value = main[production][month.value][UID][colName[0]][tempItem==='Commission'? "Bonuses": tempItem];
 						} 
 																		
 						// getting IndividualTargetBonuses & Team Target Bonuses
@@ -137,10 +137,11 @@ function IncomePayroll(props) {
 						totalBonuses += col>11 && col<17 && parseFloat(value);
 
 						tableContent[month.value][item.value] = value;	
-						tableContent[month.value][policiesAndCommissions[17].value] = totalPolicies;
-						tableContent[month.value][policiesAndCommissions[18].value] = totalBonuses;																							
+						tableContent[month.value]['Total Policies'] = totalPolicies;
+						tableContent[month.value]['Total Compensation'] = totalBonuses;																							
 					});		
-				}); 
+				});
+				console.log(tableContent);
 				Object.keys(widgets.Income_Payroll_Table.table.tableContent).map((month, rowNum) => {					
 					widgets = {
 						...widgets, Income_Payroll_Table: {

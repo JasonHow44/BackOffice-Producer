@@ -192,7 +192,7 @@ function Widget(props) {
 													{!props.editable &&
 													headers.length > 0 &&
 													formattedString(tableContent[rowKey][headers[colNum].value]) &&
-													formattedString(tableContent[rowKey][headers[colNum].value], headers[colNum].startAdornment || rows[rowNum].startAdornment, rows[rowNum].endAdornment)}
+													formattedString(tableContent[rowKey][headers[colNum].value], headers[colNum].startAdornment || rows[rowNum].startAdornment, headers[colNum].endAdornment || rows[rowNum].endAdornment)}
 
 													{props.editable && (
 														<TextInput

@@ -279,25 +279,23 @@ export const incomeBonusesColumns = [
 
 export const policiesAndCommissions = [
 	{ id: 'Auto Policies', value: 'Auto Policies' },
-	{ id: 'Auto Bonuses', value: 'Auto Commissions' },
+	{ id: 'Auto Bonuses', value: 'Auto Commission' },
 	{ id: 'Fire Policies', value: 'Fire Policies' },
-	{ id: 'Fire Bonuses', value: 'Fire Commissions' },
+	{ id: 'Fire Bonuses', value: 'Fire Commission' },
 	{ id: 'Life Policies', value: 'Life Policies' },
-	{ id: 'Life Bonuses', value: 'Life Commissions' },
+	{ id: 'Life Bonuses', value: 'Life Commission' },
 	{ id: 'Health Policies', value: 'Health Policies' },
-	{ id: 'Health Bonuses', value: 'Health Commissions' },
-	{ id: 'Bank Products', value: 'Bank Products' },
-	{ id: 'Bank Bonuses', value: 'Bank Commissions' },
+	{ id: 'Health Bonuses', value: 'Health Commission' },
+	{ id: 'Bank Policies', value: 'Bank Products' },
+	{ id: 'Bank Bonuses', value: 'Bank Commission' },
 	{ id: 'Other Activities', value: 'Other Activities' },
 	{ id: 'Other Activity Bonuses', value: 'Other Activity Bonuses' },
-	{ id: 'Individual Target Bonuses', value: 'Individual Target Commissions' },
-	{ id: 'Team Target Bonuses', value: 'Team Target Commissions' },
-	{ id: 'Policy Growth Bonuses', value: 'Policy Growth Commissions' },
-	{ id: 'Lapse Rate % Bonus', value: 'Lapse Rate % Commission' },
-	{ id: 'Special Promotion	', value: 'Special Promotion' },
+	{ id: 'Individual Target Bonuses', value: 'Individual Target Bonuses' },
+	{ id: 'Team Target Bonuses', value: 'Team Target Bonuses' },
+	{ id: 'Policy Growth Bonuses', value: 'Policy Growth Bonuses' },
+	{ id: 'Lapse Rate % Bonus', value: 'Lapse Rate % Bonus' },
 	{ id: 'Total Policies', value: 'Total Policies' },
-	{ id: 'Total Bonuses', value: 'Total Compensation' },
-	{ id: 'Bonus Verified?', value: 'Bonus Verified?' }
+	{ id: 'Total Bonuses', value: 'Total Compensation' }
 ];
 
 export const incomeGoalsRows = [
