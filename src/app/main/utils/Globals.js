@@ -51,8 +51,8 @@ export const Options = {
 	bonus: {
 		id: 'Include Initial Bonus?',
 		data: [
-			{ item: 'Include Initial Bonus in Calculation', value: 'Include Initial Bonus in Calculation' },
-			{ item: 'Do not Include Initial Bonus', value: 'Do not Include Initial Bonus' }
+			{ item: 'Include Initial Commission Calculation', value: 'Include Initial Commission Calculation' },
+			{ item: 'Do Not Include Initial Commission', value: 'Do Not Include Initial Commission' }
 		]
 	},
 	produce: {

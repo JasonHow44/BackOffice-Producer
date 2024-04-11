@@ -42,7 +42,7 @@ function SalesResults(props) {
 	const [main, setMain] = useState({});
 	const [tabValue, setTabValue] = useState(0);
 	const [production, setProduction] = useState("Show Written Production");
-	const [bonus, setBonus] = useState('Include Initial Bonus in Calculation');
+	const [bonus, setBonus] = useState('Include Initial Commission Calculation');
 	const [year, setYear] = useState(moment().format('yyyy')); 
 	const [period, setPeriod] = useState(moment().format('MMMM'));
 	const [title, setTitle] = useState('Production Summary');

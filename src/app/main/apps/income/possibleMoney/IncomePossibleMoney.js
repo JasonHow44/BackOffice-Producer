@@ -41,7 +41,7 @@ function PossibleMoney(props) {
 	const [main, setMain] = useState({});
 	const [tabValue, setTabValue] = useState(0);
 	const [production, setProduction] = useState("Show Written Production");
-	const [bonus, setBonus] = useState('Include Initial Bonus in Calculation');
+	const [bonus, setBonus] = useState('Include Initial Commission Calculation');
 	const [year, setYear] = useState(moment().format('yyyy'));
 	const [period, setPeriod] = useState(moment().format('MMMM'));
 	const [title, setTitle] = useState('Possible Money');
@@ -114,7 +114,7 @@ function PossibleMoney(props) {
 											main[production][period][user.id]['Fire']['Premium']
 										) * getLevel(policySum, policy.value, bonusPlans).amount / 100
 									);	
-									if(bonus === 'Include Initial Bonus in Calculation') {
+									if(bonus === 'Include Initial Commission Calculation') {
 										bonusSum += parseFloat(main[production][period][user.id][policy.value]['Bonuses']);
 									}							
 								} 
@@ -124,7 +124,7 @@ function PossibleMoney(props) {
 								avgPremium = dividing(premiumSum, policySum); 
 								const policyCount = main[production][period][user.id][policy.value]['Policies'];
 								bonusSum += parseFloat(getLevel(policyCount, `Team${policy.value}`, bonusPlans).amount);
-								if(bonus === 'Include Initial Bonus in Calculation') {
+								if(bonus === 'Include Initial Commission Calculation') {
 									bonusSum += parseFloat(main[production][period][user.id][policy.value]['Bonuses']);
 								}	
 							}														
@@ -259,12 +259,12 @@ function PossibleMoney(props) {
 						let nextBonus = 0;
 						if(tabValue === 0) {
 							nextBonus = (nextAutoPremium / 2 + nextFirePremium) * level.nextAmount / 100; 
-							if(bonus === 'Include Initial Bonus in Calculation') {
+							if(bonus === 'Include Initial Commission Calculation') {
 								nextBonus += parseFloat(main[production][period][UID][policy.value]['Bonuses']);
 							}
 						} else {
 							nextBonus = parseFloat(level.nextAmount);
-							if(bonus === 'Include Initial Bonus in Calculation') {
+							if(bonus === 'Include Initial Commission Calculation') {
 								users.map(user => {
 									if(user.belongTo === belongTo) {
 										nextBonus += parseFloat(main[production][period][user.id][policy.value]['Bonuses']);
@@ -390,12 +390,12 @@ function PossibleMoney(props) {
 						let maxBonus = 0;
 						if(tabValue === 0) {
 							maxBonus = (maxAutoPremium / 2 + maxFirePremium) * level.maxAmount / 100; 
-							if(bonus === 'Include Initial Bonus in Calculation') {
+							if(bonus === 'Include Initial Commission Calculation') {
 								maxBonus += parseFloat(main[production][period][UID][policy.value]['Bonuses']);
 							}
 						} else {
 							maxBonus = parseFloat(level.maxAmount);
-							if(bonus === 'Include Initial Bonus in Calculation') {
+							if(bonus === 'Include Initial Commission Calculation') {
 								users.map(user => {
 									if(user.belongTo === belongTo) {
 										maxBonus += parseFloat(main[production][period][user.id][policy.value]['Bonuses']);
