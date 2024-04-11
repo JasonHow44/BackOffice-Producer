@@ -10,7 +10,7 @@ import { selectNavbarTheme } from 'app/store/fuse/settingsSlice';
 
 import NavbarLayout1 from './NavbarLayout1';
 
-const navbarWidth = 280;
+const navbarWidth = 360;
 
 const useStyles = makeStyles(theme => ({
 	wrapper: {
