@@ -122,8 +122,12 @@ function Dashboard(props) {
 								indGoalsAndActual[`${policy.value}@Actual`] +=
 									main[production][period][user.id][policy.value]['Policies'];
 
-								household += main[production][period][user.id][policy.value]['household'];
-								individual += main[production][period][user.id][policy.value]['individual'];
+								console.log(policy.value, main[production][period][user.id][policy.value].Policies);
+								if (['Auto', 'Fire'].includes(policy.value)) {
+									individual += main[production][period][user.id][policy.value].Policies;
+								} else {
+									household += main[production][period][user.id][policy.value].Policies;
+								}
 							}
 						});
 					}
@@ -245,10 +249,10 @@ function Dashboard(props) {
 					}
 				});
 
-				// Multiline Percentage
+				// HHP%
 				let tempData = [];
 				let cardData = widgets.Dashboard_Multiline_Percentage_Panel.cardData[0];
-				cardData = { ...cardData, count: `${ceil(dividing(household * 100, household + individual))}` };
+				cardData = { ...cardData, count: `${ceil(dividing(household * 100, individual))}` };
 				tempData.push(cardData);
 				widgets = {
 					...widgets,
@@ -550,7 +554,7 @@ function Dashboard(props) {
 					>
 						<div className="widget flex w-full p-12">
 							<fieldset className='"widget flex w-2/6 mr-12 rounded-8 border-1'>
-								<legend>Multiline Percentage</legend>
+								<legend>HHP%</legend>
 								<div className="widget flex w-full p-12">
 									<Panel data={data.widgets.Dashboard_Multiline_Percentage_Panel} type="One Number" />
 								</div>
