@@ -108,9 +108,10 @@ export const getLevel = (policyCount, policyName, bonusPlans) => {
 		maxAmount: 0
 	};
 	let count = 0;
-	if (bonusPlans.length > 0 && bonusPlans[0].hasOwnProperty(dbName)) {
-		Object.keys(bonusPlans[0][dbName]).map((key, n) => {
-			const item = bonusPlans[0][dbName][key];
+	const result = (bonusPlans.length > 0 && bonusPlans.find(item => item.id === UID)) || {}
+	if (result.hasOwnProperty(dbName)) {
+		Object.keys(result[dbName]).map((key, n) => {
+			const item = result[dbName][key];
 			if (policyCount > 0) {
 				if (n === 0) {
 					level.level = 'None Reached';
@@ -118,7 +119,8 @@ export const getLevel = (policyCount, policyName, bonusPlans) => {
 				if (policyCount >= item.policies) {
 					level.level = item.level;
 					level.policies = item.policies;
-					level.amount = item.amount;
+					level.amount = parseFloat(item.amount);
+					level.dollar = item.dollar;
 					count++;
 				}
 				if (n === count) {
@@ -174,11 +176,12 @@ export const getMain = (
 			users.map(user => {
 				const { belongTo } = user;
 				const userId = user.id;
-				temp[production][month][userId] = {};
+				temp[production][month][userId] = temp[production][month][userId] || {};
 
 				policies.map(pol => {
 					const policy = pol.value;
 					const { entry } = pol;
+					const { typeOfProduct } = pol;
 					const visionPlicy = pol.vision;
 					temp[production][month][userId][policy] = {
 						Bonuses: 0,
@@ -193,7 +196,8 @@ export const getMain = (
 						growthBonus: 0,
 						specialPromotion: 0,
 						Goals: 0,
-						realGoal: 0
+						realGoal: 0,
+						...(temp[production][month][userId][policy] || {})
 					};
 
 					// adding marketing items
@@ -203,10 +207,14 @@ export const getMain = (
 					});
 
 					// adding bonusPlan items
-					const bonusPlan =
-						bonusPlans.length > 0 && bonusPlans[0].hasOwnProperty(bonusPlanDbNames[policy].db)
-							? bonusPlans[0][bonusPlanDbNames[policy].db]
-							: {};
+					let bonusPlan = {}
+					const result = (bonusPlans.length > 0 && bonusPlans.find(item => item.id === userId)) || {}
+					if (result.hasOwnProperty(bonusPlanDbNames[policy].db)) {
+						bonusPlan = result[bonusPlanDbNames[policy].db]
+					}
+
+					temp[production][month][userId][policy].targetAmount = result[`show${policy}TargetAmount`]
+					
 					Object.keys(bonusPlan).map(key => {
 						const item = bonusPlan[key];
 						temp[production][month][userId][policy][item.name] = 0;
@@ -219,13 +227,11 @@ export const getMain = (
 					if (!month.includes('Totals')) {
 						// const indBonusPlan = bonusPlans.length > 0 &&	bonusPlans[0].hasOwnProperty(bonusPlanDbNames[policy].indDb) ? bonusPlans[0][bonusPlanDbNames[policy].indDb] : {};
 						// const teamBonusPlan = bonusPlans.length > 0 &&	bonusPlans[0].hasOwnProperty(bonusPlanDbNames[policy].teamDb) ? bonusPlans[0][bonusPlanDbNames[policy].teamDb] : {};
-						const lapseBonusPlan =
-							bonusPlans.length > 0 && bonusPlans[0].hasOwnProperty(bonusPlanDbNames[policy].lapseDb)
-								? bonusPlans[0][bonusPlanDbNames[policy].lapseDb]
+						const lapseBonusPlan = result.hasOwnProperty(bonusPlanDbNames[policy].lapseDb)
+								? result[bonusPlanDbNames[policy].lapseDb]
 								: {};
-						const growthBonusPlan =
-							bonusPlans.length > 0 && bonusPlans[0].hasOwnProperty(bonusPlanDbNames[policy].growthDb)
-								? bonusPlans[0][bonusPlanDbNames[policy].growthDb]
+						const growthBonusPlan = result.hasOwnProperty(bonusPlanDbNames[policy].growthDb)
+								? result[bonusPlanDbNames[policy].growthDb]
 								: {};
 
 						//  init lapseRate
@@ -288,9 +294,10 @@ export const getMain = (
 								Object.keys(entries[0][entry][entryUserId]).map(key => {
 									const item = entries[0][entry][entryUserId][key];
 									const writtenMonth = new Date(item.datePolicyIsWritten).getMonth();
-									const issuedMonth = !item.datePolicyIsIssued
-										? ''
-										: new Date(item.datePolicyIsIssued).getMonth();
+									const issuedMonth =
+										!item.datePolicyIsIssued
+											? ''
+											: new Date(item.datePolicyIsIssued).getMonth();
 									if (production === 'Show Issued Production' && issuedMonth === '') {
 										return;
 									}
@@ -300,20 +307,18 @@ export const getMain = (
 											: months[issuedMonth].value;
 									if (month === tempMonth) {
 										const semiAnnual = policy === 'Auto' ? 2 : 1;
-										const bonus = item.dollarBonus === '' ? 0 : item.dollarBonus;
-										temp[production][month][userId][policy][item.typeOfProduct] += parseFloat(
-											item.creditPercent / 100
-										);
-										temp[production][month][userId][policy][item.sourceOfBusiness] += parseFloat(
-											item.creditPercent / 100
-										);
+										const bonus = (item.dollarBonus === '' ? 0 : item.dollarBonus) + temp[production][month][userId][policy].Bonuses;
+										temp[production][month][userId][policy].Bonuses = parseFloat(bonus);
+										temp[production][month][userId][policy][
+											`${item[typeOfProduct]}@Bonuses`
+										] = parseFloat(bonus);
 										temp[production][month][userId][policy][item.policyHolderType] += 1; // household, individual
-										temp[production][month][userId][policy].Bonuses += parseFloat(bonus);
 										temp[production][month][userId][policy].Premium +=
-											(parseFloat(item.policyPremium) *
-												parseFloat(item.creditPercent) *
+											(parseFloat(item.policyPremium || 0) *
+												parseFloat(item.creditPercent || 0) *
 												semiAnnual) /
 											100;
+										
 										temp[production][month][userId][policy].Policies += parseFloat(
 											item.creditPercent / 100
 										);
@@ -322,22 +327,80 @@ export const getMain = (
 											temp[production][month][userId][policy].Policies
 										);
 										temp[production][month][userId][policy][
-											`${item.typeOfProduct}@Bonuses`
-										] += parseFloat(bonus);
-										temp[production][month][userId][policy][`${item.typeOfProduct}@Premium`] +=
+											`${item[typeOfProduct]}@Averages`
+										] = dividing(
+											temp[production][month][userId][policy][`${item[typeOfProduct]}@Premium`],
+											temp[production][month][userId][policy][`${item.typeOfProduct}@Policies`]
+										);
+										temp[production][month][userId][policy][item[typeOfProduct]] += parseFloat(
+											item.creditPercent / 100
+										);
+										temp[production][month][userId][policy][item.sourceOfBusiness] += parseFloat(
+											item.creditPercent / 100
+										);
+										temp[production][month][userId][policy][`${item[typeOfProduct]}@Premium`] +=
 											(parseFloat(item.policyPremium) *
 												parseFloat(item.creditPercent) *
 												semiAnnual) /
 											100;
 										temp[production][month][userId][policy][
-											`${item.typeOfProduct}@Policies`
+											`${item[typeOfProduct]}@Policies`
 										] += parseFloat(item.creditPercent / 100);
-										temp[production][month][userId][policy][
-											`${item.typeOfProduct}@Averages`
-										] = dividing(
-											temp[production][month][userId][policy][`${item.typeOfProduct}@Premium`],
-											temp[production][month][userId][policy][`${item.typeOfProduct}@Policies`]
-										);
+
+										if (item.creditType === 'split_credit') {
+											
+											temp[production][month][item.creditUser] = {
+												[policy]: {
+													Bonuses: 0,
+													Premium: 0,
+													Policies: 0,
+													Averages: 0,
+													household: 0,
+													individual: 0,
+													lapseRate: 0,
+													lapseRateChange: 0,
+													lapseBonus: 0,
+													growthBonus: 0,
+													specialPromotion: 0,
+													Goals: 0,
+													realGoal: 0
+												},
+												...(temp[production][month][item.creditUser] || {})
+											}
+											const creditBonus = (bonusPlans.length > 0 && bonusPlans.find(it => it.id === item.creditUser))
+											if (creditBonus) {
+												const percent = Object.values(creditBonus[bonusPlanDbNames[policy].db]).find(it => it.name === item[typeOfProduct]).percent
+												temp[production][month][item.creditUser][policy].Bonuses += Math.ceil(
+													((parseFloat(item.policyPremium) *
+														(100 - parseFloat(item.creditPercent))) /
+														100) *
+														(parseFloat(percent) / 100) *
+														100
+												) / 100
+											}
+											temp[production][month][item.creditUser][policy][item[typeOfProduct]] += 1 - parseFloat(
+												item.creditPercent / 100
+											);
+											temp[production][month][item.creditUser][policy][item.sourceOfBusiness] += 1 - parseFloat(
+												item.creditPercent / 100
+											);
+											temp[production][month][item.creditUser][policy].Premium +=
+												(parseFloat(item.policyPremium) *
+												(100 - parseFloat(item.creditPercent)) *
+													semiAnnual) /
+												100;
+											temp[production][month][item.creditUser][policy].Policies += 1 - parseFloat(
+												item.creditPercent / 100
+											);
+											temp[production][month][item.creditUser][policy][`${item[typeOfProduct]}@Premium`] +=
+												(parseFloat(item.policyPremium) *
+													(100 - parseFloat(item.creditPercent)) *
+													semiAnnual) /
+												100;
+											temp[production][month][item.creditUser][policy][
+												`${item[typeOfProduct]}@Policies`
+											] += 1 - parseFloat(item.creditPercent / 100);
+										}
 									}
 								});
 							}

@@ -9,31 +9,33 @@ export const getBonusPlans = createAsyncThunk(
 	'incomeApp/bonusPlans/getBonusPlans', 
 	(routeParams) =>
 		new Promise((resolve, reject) => {
-			var starCountRef = realDb.ref(`BonusPlan/${belongTo}/${UID}/`);			
-			var bonusPlans = [];		
-			starCountRef.on('value', snapshot => { 
+			const starCountRef = realDb.ref(`BonusPlan/${belongTo}`)
+			const bonusPlans = [];
+			starCountRef.on("value", (snapshot) => {
 				const data = snapshot.val();
 
-				// if (data) {
-				// 	Object.keys(data).map(item => {
-				// 		bonusPlans.push(data[item]);
-				// 	});
-				// }
-				
-				if(data) {
-					var templateRef = realDb.ref(`BonusPlanTemplate/${belongTo}/${data.name}`);
-					templateRef.on('value', snapshot => { 
-						const templatePlan = snapshot.val();	
-						
-						if(templatePlan) {
-							resolve([templatePlan])
+				if (data) {
+					Object.keys(data).forEach(item => {
+						bonusPlans.push({user: item, ...data[item]});
+					});
+				}
+
+				if (data) {
+					var templateRef = realDb.ref(
+						`BonusPlanTemplate/${belongTo}`
+					);
+					templateRef.on("value", (snapshot) => {
+						const templatePlan = snapshot.val();
+
+						if (templatePlan) {
+							resolve(bonusPlans.map(item => ({ ...templatePlan[item.name], id: item.user })));
 						} else {
-							resolve([]);	
-						}						
+							resolve([]);
+						}
 					});
 				} else {
 					resolve([]);
-				}				
+				}
 			});
 		})
 );

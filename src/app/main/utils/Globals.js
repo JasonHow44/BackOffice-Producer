@@ -72,12 +72,54 @@ export const Options = {
 };
 
 export const policies = [
-	{ id: 'Auto', value: 'Auto', entry: 'Entries', vision: 'autoPolicies', color: '' },
-	{ id: 'Fire', value: 'Fire', entry: 'FireEntries', vision: 'firePolicies', color: '' },
-	{ id: 'Life', value: 'Life', entry: 'LifeEntries', vision: 'lifePolicies', color: '' },
-	{ id: 'Health', value: 'Health', entry: 'HealthEntries', vision: 'healthPolicies', color: '' },
-	{ id: 'Bank', value: 'Bank', entry: 'BankEntries', vision: 'bankProducts', color: '' },
-	{ id: 'Total', value: 'Total', entry: '', vision: 'totalProducts', color: '' }
+	{
+		id: 'Auto',
+		value: 'Auto',
+		entry: 'Entries',
+		typeOfProduct: 'typeOfProduct',
+		vision: 'autoPolicies',
+		color: ''
+	},
+	{
+		id: 'Fire',
+		value: 'Fire',
+		entry: 'FireEntries',
+		typeOfProduct: 'typeOfProductFire',
+		vision: 'firePolicies',
+		color: ''
+	},
+	{
+		id: 'Life',
+		value: 'Life',
+		entry: 'LifeEntries',
+		typeOfProduct: 'typeOfProductLife',
+		vision: 'lifePolicies',
+		color: ''
+	},
+	{
+		id: 'Health',
+		value: 'Health',
+		entry: 'HealthEntries',
+		typeOfProduct: 'typeOfProductHealth',
+		vision: 'healthPolicies',
+		color: ''
+	},
+	{
+		id: 'Bank',
+		value: 'Bank',
+		entry: 'BankEntries',
+		typeOfProduct: 'typeOfProductBank',
+		vision: 'bankProducts',
+		color: ''
+	},
+	{
+		id: 'Total',
+		value: 'Total',
+		entry: '',
+		typeOfProduct: '',
+		vision: 'totalProducts',
+		color: ''
+	}
 ];
 
 export const months = [
