@@ -129,7 +129,13 @@ function IncomeGoals(props) {
 			// console.log('OtherActivityBonus===', otherActivityBonus);
 		}
 
-		if (!_.isEmpty(otherActivityBonus) && goalsTableColumns.length === 3) {
+		if (!_.isEmpty(otherActivityBonus)) {
+			if (goalsTableColumns.length > 3) {
+				goalsTableColumns.pop()
+				bonusesTableColumns.splice(bonusesTableColumns.length - 2, 1)
+				goalsTableHeader.splice(12, goalsTableHeader.length - 12)
+				bonusesTableHeader.splice(10, bonusesTableHeader.length - 10)
+			}
 			goalsTableColumns.push({
 				id: 'otherActivityGoals',
 				title: 'OTHER ACTIVY GOALS',
@@ -172,63 +178,82 @@ function IncomeGoals(props) {
 			});
 		}
 
-		incomeAvgsRows.map((row) => {
+		// avg table content
+		incomeAvgsRows.map(row => {
 			avgsTableContent[row.value] = {};
-			policies.map((policy) => {
+			policies.map(policy => {
 				avgsTableContent[row.value][policy.value] = 0;
 			});
-			delete avgsTableContent[row.value]["Total"];
+			delete avgsTableContent[row.value].Total;
 		});
-		incomeGoalsRows.map((rowKey) => {
-			goalsTableContent[rowKey] = {};
-			incomeGoalsHeaders.map((header) => {
-				goalsTableContent[rowKey][header.value] = 0;
-			});
-		});
-		incomeGoalsRows.map((rowKey) => {
-			bonusesTableContent[rowKey] = {};
-			incomeBonusesHeaders.map((header) => {
-				bonusesTableContent[rowKey][header.value] = 0;
-			});
-		});
-		if(vision.length>0 && user!='') {				
-			if(vision[0].hasOwnProperty(user)) {
-				const visionData = vision[0][user];
 
-				// goals			
+		if (user != '') {
+			if (vision.length > 0) {
+				if (vision[0].hasOwnProperty(user)) {
+					const visionData = vision[0][user];
+					// averages
+					Object.keys(visionData.Averages).map(key => {
+						if (key !== 'id')
+							Object.keys(visionData.Averages[key]).map(valKey => {
+								avgsTableContent[toUntrimed[key]][valKey] = parseFloat(
+									visionData.Averages[key][valKey]
+								);
+							});
+					});
+					// bonuses
+					months1.map(month => {
+						bonusesTableContent[month] = {};
+					});
+					// goals
+					if (bonusPlans.length > 0){
+						months1.map((month, row) => {
+							goalsTableContent[month] = {};
+							goalsTableHeader.map((header, col) => {
+								calculateBounses({
+									row,
+									col,
+									rowKey: month,
+									colKey: header.value,
+									value: visionData.Goals[month][header.id]
+								})
+								goalsTableContent[month][header.value] = visionData.Goals[month][header.id];
+							});
+						});
+					}
+					// bonuses
+					months1.map(month => {
+						const total = bonusesTableHeader.reduce((sum, header) => {
+							if (header.value !== 'Total Bonus Goal') {
+								sum += bonusesTableContent[month][header.value] || 0
+							}
+							return sum
+						}, 0);
+
+						if (bonusesTableHeader.find(item => item.value === 'Total Bonus Goal')) {
+							bonusesTableContent[month]['Total Bonus Goal'] = total
+						}
+					});
+				}
+			} else {
+				// goals table content
 				months1.map(month => {
 					goalsTableContent[month] = {};
 					goalsTableHeader.map(header => {
-						goalsTableContent[month][header.value] = visionData.Goals[month][header.id];
+						goalsTableContent[month][header.value] = 0;
 					});
 				});
 
-				// averages
-				Object.keys(visionData['Averages']).map((key) => {
-					if(key!=="id") 
-						Object.keys(visionData['Averages'][key]).map((valKey) => {										
-								avgsTableContent[toUntrimed[key]][valKey] = parseFloat(visionData['Averages'][key][valKey])	 ;
-						});
-				}); 					
-
-				// bonuses
+				// bonuses table content
 				months1.map(month => {
 					bonusesTableContent[month] = {};
-					const total = bonusesTableHeader.reduce((sum, header) => {
-						if (header.value !== 'Total Bonus Goal') {
-							bonusesTableContent[month][header.value] = visionData.Bonuses[month][header.id];
-							return sum += visionData.Bonuses[month][header.id] || 0
-						}
-						return sum
-					}, 0);
-					if (bonusesTableHeader.find(item => item.value === 'Total Bonus Goal')) {
-						bonusesTableContent[month]['Total Bonus Goal'] = total
-					}
+					bonusesTableHeader.map(header => {
+						bonusesTableContent[month][header.value] = 0;
+					});
 				});
 			}
-		} 
+		}
 
-		setMain({ 
+		setMain({
 			avgsTableContent,
 			goalsTableColumns,
 			goalsTableHeader,
@@ -445,6 +470,119 @@ function IncomeGoals(props) {
 			bonusesTableContent
 		});
 	}, [cell]);
+
+	function calculateBounses(cell) {
+		let {row} = cell;
+		const {col} = cell;
+		let {rowKey} = cell;
+		const {colKey} = cell;
+		let value = parseFloat(cell.value === '' ? 0 : cell.value);
+		let value1 = 0;
+		let r = row;
+		const rr = 12;
+		const maxRow = 16;
+		const skipCol = 5;
+
+		if (col >= 5 && col <= 11) {
+			return;
+		}
+		if (row >= 12 && row < 16) {
+			row = (row % 12) * 3;
+			rowKey = months1[row];
+			value = parseFloat(cell.value === '' ? 0 : cell.value / 3);
+			r = row;
+		}
+
+		if (row >= 16 && cell.row < 17) {
+			row = 0;
+			rowKey = months1[row];
+			value = parseFloat(cell.value === '' ? 0 : cell.value / 12);
+			r = row;
+		}
+
+		const avgCols = Object.keys(avgsTableContent['Average Annual Premium']);
+		const goalCols = _.map(goalsTableHeader, item => item.value);
+		const bonusCols = _.map(bonusesTableHeader, item => item.value);
+
+		for (let i = r; i < rr; i++) {
+			let step = 3;
+			if (cell.row === 16) {
+				step = 12;
+			}
+			const startQuarterIndex = (r - (r % step)) / step;
+			const quarterIndex = (i - (i % 3)) / 3;
+
+			if (cell.row !== 16 && quarterIndex > startQuarterIndex) break;
+
+			const t = quarterIndex + 12;
+			value1 = parseFloat(value * avgsTableContent['Average Annual Premium'][avgCols[col]]);
+
+			if (col < 6) {
+				if (col === 0) {
+					bonusesTableContent[months1[i]][bonusCols[col]] =
+						(value1 * avgsTableContent['Average Commission'][avgCols[col]]) / (2 * 100);
+				} else {
+					bonusesTableContent[months1[i]][bonusCols[col]] =
+						(value1 * avgsTableContent['Average Commission'][avgCols[col]]) / 100;
+				}
+				const level = getLevel(goalsTableContent[months1[i]][goalCols[col]], policies[col].value, bonusPlans, user);
+
+				bonusesTableContent[months1[i]][bonusCols[col + skipCol]] = bonusPlans[0][`show${policies[col].value}TargetAmount`] ? 
+					parseFloat(level.dollar) : 
+					(parseFloat(goalsTableContent[months1[i]][`Annual ${policies[col].value} Premium`]) * level.amount / 100)
+
+				bonusesTableContent[months1[t]][bonusCols[col]] =
+					bonusesTableContent[months1[(t - 12) * 3]][bonusCols[col]] +
+					bonusesTableContent[months1[(t - 12) * 3 + 1]][bonusCols[col]] +
+					bonusesTableContent[months1[(t - 12) * 3 + 2]][bonusCols[col]];
+				bonusesTableContent[months1[t]][bonusCols[col + skipCol]] =
+					bonusesTableContent[months1[(t - 12) * 3]][bonusCols[col + skipCol]] +
+					bonusesTableContent[months1[(t - 12) * 3 + 1]][bonusCols[col + skipCol]] +
+					bonusesTableContent[months1[(t - 12) * 3 + 2]][bonusCols[col + skipCol]];
+
+				bonusesTableContent[months1[t]][bonusCols[col + skipCol]] =
+					bonusesTableContent[months1[(t - 12) * 3]][bonusCols[col + skipCol]] +
+					bonusesTableContent[months1[(t - 12) * 3 + 1]][bonusCols[col + skipCol]] +
+					bonusesTableContent[months1[(t - 12) * 3 + 2]][bonusCols[col + skipCol]];
+
+				bonusesTableContent[months1[maxRow]][bonusCols[col]] =
+					bonusesTableContent[months1[maxRow - 4]][bonusCols[col]] +
+					bonusesTableContent[months1[maxRow - 3]][bonusCols[col]] +
+					bonusesTableContent[months1[maxRow - 2]][bonusCols[col]] +
+					bonusesTableContent[months1[maxRow - 1]][bonusCols[col]];
+				bonusesTableContent[months1[maxRow]][bonusCols[col + skipCol]] =
+					bonusesTableContent[months1[maxRow - 4]][bonusCols[col + skipCol]] +
+					bonusesTableContent[months1[maxRow - 3]][bonusCols[col + skipCol]] +
+					bonusesTableContent[months1[maxRow - 2]][bonusCols[col + skipCol]] +
+					bonusesTableContent[months1[maxRow - 1]][bonusCols[col + skipCol]];
+
+			}
+			if (col > 11) {
+				bonusesTableContent[months1[i]][goalCols[col]] =
+					value * getOtherActivityBonus(goalCols[col], bonusPlans);
+				bonusesTableContent[months1[t]][goalCols[col]] =
+					bonusesTableContent[months1[(t - 12) * 3]][goalCols[col]] +
+					bonusesTableContent[months1[(t - 12) * 3 + 1]][goalCols[col]] +
+					bonusesTableContent[months1[(t - 12) * 3 + 2]][goalCols[col]];
+				bonusesTableContent[months1[maxRow]][goalCols[col]] =
+					bonusesTableContent[months1[maxRow - 4]][goalCols[col]] +
+					bonusesTableContent[months1[maxRow - 3]][goalCols[col]] +
+					bonusesTableContent[months1[maxRow - 2]][goalCols[col]] +
+					bonusesTableContent[months1[maxRow - 1]][goalCols[col]];
+				bonusesTableContent[months1[maxRow]][goalCols[col]] =
+					bonusesTableContent[months1[maxRow - 4]][goalCols[col]] +
+					bonusesTableContent[months1[maxRow - 3]][goalCols[col]] +
+					bonusesTableContent[months1[maxRow - 2]][goalCols[col]] +
+					bonusesTableContent[months1[maxRow - 1]][goalCols[col]];
+			}
+		}
+
+		setMain({
+			bonusesTableColumns,
+			bonusesTableHeader,
+			bonusesTableContent
+		});
+	}
 
 	function handleInputChange(property) {
 		setCell(property);
