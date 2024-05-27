@@ -45,7 +45,7 @@ function IncomePayroll(props) {
 	const [main, setMain] = useState({});
 	const [tabValue, setTabValue] = useState(0);
 	const [year, setYear] = useState(moment().format('yyyy'));
-	const [production, setProduction] = useState("Show Written Production");
+	const [production, setProduction] = useState("Show Issued Production");
 	const [title, setTitle] = useState('Payroll Report');
 	
 	useEffect(() => {
