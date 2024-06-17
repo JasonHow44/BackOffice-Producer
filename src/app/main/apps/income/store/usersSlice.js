@@ -6,18 +6,27 @@ export const getUsers = createAsyncThunk(
 	'incomeApp/users/getUsers', 
 	() =>
 		new Promise((resolve, reject) => {
-			var starCountRef = realDb.ref(`users/`);
-			var users = [];
+			const belongTo = sessionStorage.getItem('@BELONGTO');
+			const starCountRef = realDb.ref(`users/`);
+			let users = [];
 			starCountRef.on('value', snapshot => {
 				const data = snapshot.val();
 
 				if (data) {
-					Object.keys(data).map(item => {
-						users.push(data[item]);
-					});
+					users = Object.values(data).filter(item => item.belongTo === belongTo);
 				}
-				
-				resolve(users);
+
+				const adminStarCountRef = realDb.ref(`admin/${belongTo}`);
+
+				adminStarCountRef.on('value', adminSnapshot => {
+					const adminData = adminSnapshot.val();
+
+					if (adminData) {
+						users.push(adminData);
+					}
+
+					resolve(users);
+				});
 			});
 		})
 );
