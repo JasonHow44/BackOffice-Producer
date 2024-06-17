@@ -138,12 +138,16 @@ function Dashboard(props) {
 								// 	main[production][period][user.id][policy.value]['realGoal'];
 								teamGoalsAndActual[`Total@Goal`] +=
 									main[production][period][user.id][policy.value]['Goals'];
-								teamGoalsAndActual[`Total@Actual`] +=
-									main[production][period][user.id][policy.value]['Policies'];
-								// teamGoalsAndActual[`${policy.value}@realGoal`] +=
-								// 	main[production][period][user.id][policy.value]['realGoal'];
 								teamGoalsAndActual[`${policy.value}@Goal`] +=
 									main[production][period][user.id][policy.value]['Goals'];
+							}
+						});
+					}
+					if (user.id !== belongTo) {
+						policies.map(policy => {
+							if (policy.value !== 'Total') {
+								teamGoalsAndActual[`Total@Actual`] +=
+									main[production][period][user.id][policy.value]['Policies'];
 								teamGoalsAndActual[`${policy.value}@Actual`] +=
 									main[production][period][user.id][policy.value]['Policies'];
 							}

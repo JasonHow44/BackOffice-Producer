@@ -6,33 +6,28 @@ export const getUsers = createAsyncThunk(
 	'dashboardApp/users/getUsers',
 	() =>
 	new Promise((resolve, reject) => {
+		const belongTo = sessionStorage.getItem('@BELONGTO');
 		var starCountRef = realDb.ref(`users/`);
 		var agencyRef = realDb.ref(`agency/`);
-		var adminRef = realDb.ref(`admin/`);
+		var adminRef = realDb.ref(`admin/${belongTo}`);
 		var users = [];
 		starCountRef.on('value', snapshot => {
 			const data = snapshot.val();
 
 			if (data) {
-				Object.keys(data).map(item => {
-					users.push(data[item]);
-				});
+				users = Object.values(data).filter(item => item.belongTo === belongTo)
 			}
 
 			agencyRef.on('value', snap => {
 				const agencyData = snap.val()
 				if (agencyData) {
-					Object.keys(agencyData).map(item => {
-						users.push(agencyData[item]);
-					});
+					users.push(...Object.values(agencyData).filter(item => item.belongTo === belongTo));
 				}
 
 				adminRef.on('value', adminSnap => {
 					const adminData = adminSnap.val()
 					if (adminData) {
-						Object.keys(adminData).map(item => {
-							users.push(adminData[item]);
-						});
+						users.push(adminData);
 					}
 					resolve(users);
 				})
