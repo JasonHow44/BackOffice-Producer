@@ -64,6 +64,20 @@ function IncomePayroll(props) {
 		}
 	}, [entries, bonusPlans, users, lapseRate, policyGrowth]);
 
+	function allIndividualTargetBonus(period, userId) {
+    return ['Auto', 'Fire', 'Life', 'Health', 'Bank'].reduce((sum, policy) => {
+      const temp = main[production][period][userId][policy]
+      const policyCount = temp["Policies"];
+      const level = getLevel(policyCount, policy, bonusPlans, userId)
+
+      if (policyCount > 0) {
+        sum += temp["targetAmount"] ? parseFloat(level.dollar) : (parseFloat(
+            temp["Premium"]) * level.amount / 100);
+      }
+      return sum
+    }, 0)
+  }
+
 	useEffect(() => { 
 		if(!_.isEmpty(widgets) && !_.isEmpty(main)) {
 			if(widgets.Income_Payroll_Table) {
@@ -88,19 +102,23 @@ function IncomePayroll(props) {
 																		
 						// getting IndividualTargetBonuses & Team Target Bonuses
 						else if(item.value==='Individual Target Bonuses' || item.value==='Team Target Bonuses') {
-							if(bonusPlans.length > 0) {
-								let indTargetBonuses = 0;
+							if (bonusPlans.length > 0) {
+								const indTargetBonuses = allIndividualTargetBonus(month.value, UID)
 								let teamTargetBonus = 0;
-								policies.map(policy => {
-									if(policy.value !== 'Total') {
-										const policyCount = main[production][month.value][UID][policy.value]['Policies'];
-										indTargetBonuses += parseFloat(
-											(
-												main[production][month.value][UID]['Auto']['Premium'] / 2 +
-												main[production][month.value][UID]['Fire']['Premium']
-											) * getLevel(policyCount, policy.value, bonusPlans).amount / 100	
+								policies.map((policy) => {
+									if (policy.value !== "Total") {
+										const policyCount =
+											main[production][month.value][UID][
+												policy.value
+											]["Policies"];
+										teamTargetBonus += parseFloat(
+											getLevel(
+												policyCount,
+												`Team${policy.value}`,
+												bonusPlans,
+												UID
+											).amount
 										);
-										teamTargetBonus += parseFloat(getLevel(policyCount, `Team${policy.value}`, bonusPlans).amount);
 									}
 								});
 								if(item.value === 'Individual Target Bonuses') {
